@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Santapédia' %}{% endblock %}
+
+{% block 'css'%}
+    <link rel="stylesheet" href="{% static 'css/prayers.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+    <h1 class="welcome">{% trans 'Bem-vindo(a) a Santapédia!' %}</h1>
+    
+    <div class="container">
+        <!-- Saints -->
+        <h2>{% trans 'Santos' %} ({{ len_saints }})</h2>
+        {% for saint in saints %}
+            <a href="http://127.0.0.1:8000/articles/{{saint.slug}}/" class="article">
+                <div class="media">
+                        <div class="media-body">
+                        {% if request.LANGUAGE_CODE == 'en' %}
+                            <h3 class="mt-0 mb-1">{{ saint.title_en }}</h3>
+                            <p>{{ saint.description_en }}</p>
+                            <p>{{ saint.content_en|truncatechars_html:500|safe }}</p>
+                        {% else %}
+                            <h3 class="mt-0 mb-1">{{ saint.title_pt }}</h3>
+                            <p>{{ saint.description_pt }}</p>
+                            <p>{{ saint.content_pt|truncatechars_html:500|safe }}</p>
+                        {% endif %}    
+                        </div>
+
+                        {% if request.LANGUAGE_CODE == 'en' %}
+                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_en }}">
+                        {% else %}
+                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_pt }}">
+                        {% endif %}
+                        
+                </div>
+            </a>
+        {% endfor %}
+        <p><a href="{% url 'saints' %}" id="saint_link">{% trans 'Ver todos os santos' %}</a></p>
+
+        <!-- Prayers -->
+        <h2>{% trans 'Orações' %} ({{ len_prayers }})</h2>
+        {% for prayer in prayers %}
+            {% if request.LANGUAGE_CODE == 'en' %}
+                
+                <article class="media" id="{{ prayer.title_en }}">
+                <div class="body">
+                    <h3>{{ prayer.title_en }}</h3>
+                    {% if prayer.saint %}
+                        <p class="text-muted mb-1">{% trans 'Santo' %}: <strong>{{ prayer.saint.title_en }}</strong></p>
+                    {% endif %}
+                    <p class="prayer-text" id="text-{{ prayer.id }}">
+                        {{ prayer.content_en|truncatechars_html:175|safe }}
+                    </p>
+                    
+                    <!-- Read full prayer -->
+                    <button class="collapse-btn" type="button" data-id="{{ prayer.id }}" aria-expanded="false">
+                        {% trans 'Ler oração completa' %}<i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+
+                {% if prayer.saint and prayer.saint.image %}
+                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_en }}">
+                {% endif %}
+            </article>
+
+            {% else %}
+
+                <article class="media" id="{{ prayer.title_pt }}">
+                <div class="body">
+                    <h3>{{ prayer.title_pt }}</h3>
+                    {% if prayer.saint %}
+                        <p class="text-muted mb-1">{% trans 'Santo' %}: <strong>{{ prayer.saint.title_pt }}</strong></p>
+                    {% endif %}
+                    <p class="prayer-text" id="text-{{ prayer.id }}">
+                        {{ prayer.content_pt|truncatechars_html:175|safe }}
+                    </p>
+                    
+                    <!-- Read full prayer -->
+                    <button class="collapse-btn" type="button" data-id="{{ prayer.id }}" aria-expanded="false">
+                        {% trans 'Ler oração completa' %}<i class="bi bi-chevron-down"></i>
+                    </button>
+                </div>
+
+                {% if prayer.saint and prayer.saint.image %}
+                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_pt }}">
+                {% endif %}
+            </article>
+                
+            {% endif %}
+            
+        {% endfor %}
+        <p><a href="{% url 'prayers' %}" id="saint_link">{% trans 'Ver todos as orações' %}</a></p>
+    </div>
+
+<script>
+    // Show short and full version of a prayer
+    const prayersData = {
+    {% for prayer in prayers %}
+        {% if request.LANGUAGE_CODE == 'en' %}
+            "{{ prayer.id }}": {
+                "short": `{{ prayer.content_en|truncatechars_html:400|escapejs }}`,
+                "full": `{{ prayer.content_en|linebreaks|escapejs }}`
+            },
+        {% else %}
+            "{{ prayer.id }}": {
+                "short": `{{ prayer.content_pt|truncatechars_html:400|escapejs }}`,
+                "full": `{{ prayer.content_pt|linebreaks|escapejs }}`
+            },
+        {% endif %}
+    {% endfor %}
+    };
+</script>
+
+<script src="{% static 'js/prayers.js' %}"></script>
+
+{% endblock %}

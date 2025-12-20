@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+:root {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #f7f7f7;
+    --color-7: #ffffff;
+    --color-8: #000000;
+    --color-9: #555555;
+    --color-10: #1e3a8a;
+}
+body.dark-mode {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #2a2a2a;
+    --color-7: #000000;
+    --color-8: #ffffff;
+    --color-9: #a1a1a1;
+    --color-10: #0d6efd;
+}
+h1 {
+    margin-bottom: 25px;
+}
+/* .media {
+    background-color: var(--color-6);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
+    border-radius: 15px;
+    margin: 20px;
+    padding: 10px;
+} */
+
+
+.media {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch; /* Faz a imagem colar nas bordas verticais */
+    background-color: var(--color-6);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
+    border-radius: 15px;
+    margin: 20px;
+    padding: 10px;
+    overflow: hidden; /* Evita que a imagem "vaze" da div */
+}
+.media .body {
+    flex: 1;
+    padding: 15px;
+    text-align: justify;
+}
+.media img {
+    width: 200px;           /* largura fixa da imagem */
+    height: auto;           /* altura automática */
+    object-fit: cover;      /* corta o excesso sem distorcer */
+    border-radius: 15px;
+    align-self: stretch;    /* faz a imagem colar no topo e no fundo da .media */
+    flex-shrink: 0;         /* evita encolher */
+}
+
+
+
+.prayer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+}
+.prayer-header div{
+    padding: 15px;
+}
+/* article img {
+    width: 20%;                 
+    height: 100%;                 
+    object-fit: cover;            
+    border-radius: 15px;
+    flex-shrink: 0;
+} */
+@media (max-width: 768px) {
+    .media {
+        flex-direction: column; /* imagem abaixo do texto */
+        align-items: center;
+    }
+
+    .media img {
+        width: 100%;
+        max-height: 300px;
+        border-radius: 0 0 15px 15px;
+        align-self: center;
+        object-position: top;
+    }
+}
+.collapse-btn {
+    color: var(--color-10);
+    font-weight: 600;
+    cursor: pointer;
+    padding: 0;
+    width: 100%;
+}
+
+.collapse-btn:hover {
+    color: var(--color-4);
+    background-color: transparent;
+}
+
+.collapse-btn i {
+    margin-left: 4px;
+    transition: transform 0.3s ease;
+}
+
+.rotated {
+    transform: rotate(180deg);
+}
+
+.prayer-text {
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    font-size: 1.3em;
+    line-height: 1.6;
+    margin: 0px;
+}
+/* .body{
+    padding: 15px;
+    text-align: justify;
+} */
+.body h2{
+    text-align: left;
+}
+.body button{
+    margin: 0px;
+}

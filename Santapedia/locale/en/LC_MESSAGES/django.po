@@ -1,0 +1,470 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-11-24 17:28-0300\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\articles\templates\base.html:40
+msgid "Menu principal"
+msgstr "Main Menu"
+
+#: .\articles\templates\base.html:42
+msgid "Página principal"
+msgstr "Home"
+
+#: .\articles\templates\base.html:43 .\articles\templates\htmls\home.html:17
+#: .\articles\templates\htmls\search.html:55
+msgid "Santos"
+msgstr "Saints"
+
+#: .\articles\templates\base.html:44
+msgid "Santo aleatório"
+msgstr "Random Saint"
+
+#: .\articles\templates\base.html:45 .\articles\templates\htmls\home.html:33
+#: .\articles\templates\htmls\prayers.html:4
+#: .\articles\templates\htmls\prayers.html:57
+msgid "Orações"
+msgstr "Prayers"
+
+#: .\articles\templates\base.html:46
+#: .\articles\templates\htmls\patronized_cities.html:4
+msgid "Padroeiro da Cidade"
+msgstr "City Patron Saint"
+
+#: .\articles\templates\base.html:47 .\articles\templates\htmls\calendar.html:4
+msgid "Calendário Litúrgico"
+msgstr "Liturgical Calendar"
+
+#: .\articles\templates\base.html:48
+#: .\articles\templates\htmls\santapedia.html:4
+#: .\articles\templates\htmls\santapedia.html:13
+msgid "Sobre a Santapédia"
+msgstr "About Santapedia"
+
+#: .\articles\templates\base.html:49 .\articles\templates\htmls\contact.html:4
+#: .\articles\templates\htmls\santapedia.html:125
+msgid "Contato"
+msgstr "Contact"
+
+#: .\articles\templates\base.html:54
+#: .\articles\templates\htmls\santapedia.html:22
+msgid "Logo da Santapédia"
+msgstr "Santapedia Logo"
+
+#: .\articles\templates\base.html:55 .\articles\templates\htmls\contact.html:4
+#: .\articles\templates\htmls\detail.html:4
+#: .\articles\templates\htmls\home.html:4
+#: .\articles\templates\htmls\santapedia.html:20
+msgid "Santapédia"
+msgstr "Santapedia"
+
+#: .\articles\templates\base.html:61
+msgid "Pesquisar..."
+msgstr "Search..."
+
+#: .\articles\templates\base.html:63
+msgid "Pesquisar"
+msgstr "Search"
+
+#: .\articles\templates\base.html:82
+msgid "2025 Santapédia - A Enciclopédia Católica"
+msgstr "2025 Santapedia - The Catholic Encyclopedia"
+
+#: .\articles\templates\htmls\calendar.html:12
+msgid "Calendário Litúrgico dos Santos"
+msgstr "Liturgical Calendar of Saints"
+
+#: .\articles\templates\htmls\calendar.html:24
+msgid "Santos deste mês"
+msgstr "Saints of this Month"
+
+#: .\articles\templates\htmls\calendar.html:27
+msgid "Carregando santos..."
+msgstr "Loading saints..."
+
+#: .\articles\templates\htmls\contact.html:15
+msgid "Mensagem enviada com sucesso!"
+msgstr "Message sent successfully!"
+
+#: .\articles\templates\htmls\contact.html:22
+msgid "Enviar um email"
+msgstr "Send an email"
+
+#: .\articles\templates\htmls\contact.html:33
+msgid "Enviar"
+msgstr "Send"
+
+#: .\articles\templates\htmls\detail.html:13
+msgid "Neste artigo"
+msgstr "In this article"
+
+#: .\articles\templates\htmls\detail.html:18
+msgid "PUBLICADO"
+msgstr "PUBLISHED"
+
+#: .\articles\templates\htmls\detail.html:30
+msgid "Sem imagem disponível"
+msgstr "No image available"
+
+#: .\articles\templates\htmls\detail.html:36
+msgid "Nascimento"
+msgstr "Birth"
+
+#: .\articles\templates\htmls\detail.html:46
+msgid "Morte"
+msgstr "Death"
+
+#: .\articles\templates\htmls\detail.html:56
+msgid "Canonização"
+msgstr "Canonization"
+
+#: .\articles\templates\htmls\detail.html:66
+msgid "Dia Festivo"
+msgstr "Feast Day"
+
+#: .\articles\templates\htmls\detail.html:72
+msgid "Padroeiro(a)"
+msgstr "Patron"
+
+#: .\articles\templates\htmls\detail.html:86
+msgid "Oração"
+msgstr "Prayer"
+
+#: .\articles\templates\htmls\detail.html:91
+msgid "Bibliografia"
+msgstr "Bibliography"
+
+#: .\articles\templates\htmls\home.html:13
+msgid "Bem-vindo(a) a Santapédia!"
+msgstr "Welcome to Santapedia!"
+
+#: .\articles\templates\htmls\home.html:30
+msgid "Ver todos os santos"
+msgstr "View all saints"
+
+#: .\articles\templates\htmls\home.html:39
+#: .\articles\templates\htmls\prayers.html:38
+#: .\articles\templates\htmls\prayers.html:65
+msgid "Santo"
+msgstr "Saint"
+
+#: .\articles\templates\htmls\home.html:47
+#: .\articles\templates\htmls\prayers.html:73
+msgid "Ler oração completa"
+msgstr "Read full prayer"
+
+#: .\articles\templates\htmls\home.html:56
+msgid "Ver todos as orações"
+msgstr "View all prayers"
+
+#: .\articles\templates\htmls\patronized_cities.html:17
+msgid "Escolha o país"
+msgstr "Choose the country"
+
+#: .\articles\templates\htmls\patronized_cities.html:18
+msgid "Brasil"
+msgstr "Brazil"
+
+#: .\articles\templates\htmls\patronized_cities.html:23
+msgid "Escolha o estado"
+msgstr "Choose the state"
+
+#: .\articles\templates\htmls\patronized_cities.html:55
+msgid "Escolha a cidade"
+msgstr "Choose the city"
+
+#: .\articles\templates\htmls\patronized_cities.html:61
+#: .\articles\templates\htmls\prayers.html:47
+#: .\articles\templates\htmls\search.html:45
+msgid "Filtrar"
+msgstr "Filter"
+
+#: .\articles\templates\htmls\patronized_cities.html:64
+#: .\articles\templates\htmls\prayers.html:50
+#: .\articles\templates\htmls\search.html:48
+msgid "Limpar"
+msgstr "Clear"
+
+#: .\articles\templates\htmls\patronized_cities.html:69
+msgid "Santo Padroeiro"
+msgstr "Patron Saint"
+
+#: .\articles\templates\htmls\patronized_cities.html:86
+msgid "Nenhum santo encontrado"
+msgstr "No saint found"
+
+#: .\articles\templates\htmls\prayers.html:14
+#: .\articles\templates\htmls\search.html:13
+msgid "Filtrar pesquisa"
+msgstr "Filter search"
+
+#: .\articles\templates\htmls\prayers.html:22
+#: .\articles\templates\htmls\search.html:20
+msgid "Ordenar por"
+msgstr "Sort by"
+
+#: .\articles\templates\htmls\prayers.html:23
+#: .\articles\templates\htmls\search.html:21
+msgid "Mais recentes"
+msgstr "Most recent"
+
+#: .\articles\templates\htmls\prayers.html:24
+#: .\articles\templates\htmls\search.html:22
+msgid "Mais antigos"
+msgstr "Oldest"
+
+#: .\articles\templates\htmls\prayers.html:25
+#: .\articles\templates\htmls\prayers.html:45
+#: .\articles\templates\htmls\search.html:23
+#: .\articles\templates\htmls\search.html:43
+msgid "Nome"
+msgstr "Name"
+
+#: .\articles\templates\htmls\prayers.html:30
+#: .\articles\templates\htmls\search.html:28
+msgid "Categoria"
+msgstr "Category"
+
+#: .\articles\templates\htmls\prayers.html:85
+msgid "Nenhuma oração cadastrada."
+msgstr "No prayers registered."
+
+#: .\articles\templates\htmls\santapedia.html:26
+msgid "A enciclopédia católica"
+msgstr "The Catholic encyclopedia"
+
+#: .\articles\templates\htmls\santapedia.html:29
+msgid "Data de Lançamento"
+msgstr "Release Date"
+
+#: .\articles\templates\htmls\santapedia.html:30
+msgid "01 de Janeiro"
+msgstr "January 1st"
+
+#: .\articles\templates\htmls\santapedia.html:33
+msgid "Criador"
+msgstr "Creator"
+
+#: .\articles\templates\htmls\santapedia.html:38
+msgid "Redes Sociais"
+msgstr "Social Media"
+
+#: .\articles\templates\htmls\santapedia.html:42
+msgid "Endereço Eletrônico"
+msgstr "Website"
+
+#: .\articles\templates\htmls\santapedia.html:53
+msgid ""
+"A <strong>Santapédia</strong> é uma enciclopédia católica online focada em "
+"espalhar conhecimento sobre a vida dos Santos, Beatos e da Igreja Católica. "
+"Criada para reunir e organizar informações sobre aqueles que marcaram a "
+"história da nossa Igreja. Seu objetivo é tornar acessível, em formato "
+"digital, o testemunho de fé e virtude que inspira milhões de pessoas."
+msgstr ""
+"<strong>Santapedia</strong> is an online Catholic encyclopedia focused on "
+"spreading knowledge about the lives of Saints, Blesseds, and the Catholic "
+"Church. It was created to gather and organize information about those who "
+"marked the history of our Church. Its goal is to make accessible, in digital "
+"format, the testimony of faith and virtue that inspires millions of people."
+
+#: .\articles\templates\htmls\santapedia.html:57
+msgid "Criação"
+msgstr "Creation"
+
+#: .\articles\templates\htmls\santapedia.html:61
+msgid ""
+"A criação da Santapédia surge como uma iniciativa de um adolescente "
+"apaixonado por tecnologia e pela fé cristã, que decidiu unir linhas de "
+"código e espiritualidade em um único projeto. Foi também criada com o "
+"intuito de ser uma ferramenta de evangelização, para que católicos de todos "
+"os lugares do mundo possam descobrir e se aprofundar mais na história e "
+"cultura da sua própria religião."
+msgstr ""
+"Santapedia was created as an initiative by a teenager passionate about "
+"technology and the Christian faith, who decided to unite lines of code and "
+"spirituality in a single project. It was also created with the intention of "
+"being an evangelization tool, so that Catholics from all over the world can "
+"discover and deepen their knowledge of the history and culture of their own "
+"religion."
+
+#: .\articles\templates\htmls\santapedia.html:64
+msgid "Inspirações"
+msgstr "Inspirations"
+
+#: .\articles\templates\htmls\santapedia.html:68
+msgid ""
+"A criação desta plataforma teve originalmente várias inspirações. No nome "
+"\"Santapédia\" e na estrutura do site há uma clara inspiração a <a "
+"href=\"https://www.wikipedia.org/\" target=\"_blank\">Wikipédia</a>, a "
+"inciclopédia livre que proporciona a humanidade transmitir conhecimentos "
+"através de artigos, assim, também é o objetivo da Santapédia."
+msgstr ""
+"The creation of this platform originally had several inspirations. In the "
+"name \"Santapedia\" and in the website’s structure, there is a clear "
+"inspiration from <a href=\"https://www.wikipedia.org/\" target=\"_blank\">"
+"Wikipedia</a>, the free encyclopedia that enables humanity to share "
+"knowledge through articles — and that is also Santapedia’s purpose."
+
+#: .\articles\templates\htmls\santapedia.html:71
+msgid ""
+"Outra inspiração foi a de <a href=\"http://127.0.0.1:8000/articles/sao-carlo-"
+"acutis/\">São Carlo Acutis</a>, o Padroeiro da Internet, santo católico que "
+"criou o site <a href=\"https://www.miracolieucaristici.org/\" "
+"target=\"_blank\">www.miracolieucaristici.org</a>, site focado em mostrar "
+"todos os milagres da Santa Eucaristia existentes. Seguindo os legados dele, "
+"a Santapédia tenta ter esse sucesso evangelizador mostrando milagres, para "
+"que fortaleça a fé do cristão que está lendo."
+msgstr ""
+"Another inspiration was <a href=\"http://127.0.0.1:8000/articles/sao-carlo-"
+"acutis/\">Saint Carlo Acutis</a>, the Patron Saint of the Internet, a "
+"Catholic saint who created the website <a href=\"https://www."
+"miracolieucaristici.org/\" target=\"_blank\">www.miracolieucaristici.org</a>,"
+" dedicated to presenting all known Eucharistic miracles. Following his "
+"example, Santapedia seeks to achieve this evangelizing mission by presenting "
+"miracles that strengthen the faith of those who read."
+
+#: .\articles\templates\htmls\santapedia.html:74
+msgid "Medalha de São Bento"
+msgstr "Saint Benedict Medal"
+
+#: .\articles\templates\htmls\santapedia.html:75
+msgid ""
+"Medalha de <a href=\"http://127.0.0.1:8000/articles/sao-bento/\">São Bento"
+msgstr ""
+"Medal of <a href=\"http://127.0.0.1:8000/articles/sao-bento/\">Saint Benedict"
+
+#: .\articles\templates\htmls\santapedia.html:78
+msgid ""
+"A medalha de São Bento é um símbolo católico de proteção espiritual, fé e "
+"bênçãos, conhecida por afastar o mal, a inveja, as tentações e doenças, além "
+"de fortalecer a devoção e a conexão com o divino. Com isso, essa medalha faz "
+"parte da logo oficial, para que nenhum mal aconteça."
+msgstr ""
+"The Saint Benedict Medal is a Catholic symbol of spiritual protection, faith, "
+"and blessings. It is known for driving away evil, envy, temptations, and "
+"illnesses, as well as strengthening devotion and connection with the divine. "
+"For this reason, the medal is part of the official logo, so that no harm may "
+"come."
+
+#: .\articles\templates\htmls\santapedia.html:85
+msgid ""
+"Cores do manto de <a href=\"http://127.0.0.1:8000/articles/nossa-senhora-"
+"aparecida/\">Nossa Senhora Aparecida."
+msgstr ""
+"Colors of the mantle of <a href=\"http://127.0.0.1:8000/articles/nossa-"
+"senhora-aparecida/\">Our Lady of Aparecida."
+
+#: .\articles\templates\htmls\santapedia.html:88
+msgid ""
+"As cores da nossa logo e da estrutura do nosso site, o azul e o dourado, "
+"foram inspirados nas cores do manto de Nossa Senhora Aparecida, a padroeira "
+"do Brasil. Para que fiquemos sob a proteção da nossa Santa Mãe."
+msgstr ""
+"The colors of our logo and website structure — blue and gold — were inspired "
+"by the mantle of Our Lady of Aparecida, the Patroness of Brazil, so that we "
+"may remain under the protection of our Holy Mother."
+
+#: .\articles\templates\htmls\santapedia.html:93
+msgid "Missão"
+msgstr "Mission"
+
+#: .\articles\templates\htmls\santapedia.html:97
+msgid ""
+"A nossa missão é compartilhar a vida exemplar de cada santo e beato, "
+"narrando sua jornada até o reconhecimento da Igreja, buscando ser fonte de "
+"inspiração e conhecimento para católicos e para todos que se interessam pela "
+"história da Igreja. Também mostramos os milagres que eles já proporcionaram "
+"na vida das pessoas, apresentando santos pouco conhecidos, para inspirar "
+"novas devoções e fortalecer a fé."
+msgstr ""
+"Our mission is to share the exemplary life of every saint and blessed, "
+"telling their journey toward recognition by the Church. We seek to be a "
+"source of inspiration and knowledge for Catholics and for all who are "
+"interested in the history of the Church. We also present the miracles they "
+"have performed in people's lives, highlighting lesser-known saints to inspire "
+"new devotions and strengthen the faith."
+
+#: .\articles\templates\htmls\santapedia.html:100
+msgid ""
+"Nosso objetivo também é facilitar o acesso a informações confiáveis sobre a "
+"tradição católica, permitindo que a Santapédia seja usada como referência de "
+"pesquisa e estudo e instrumento para a catequização de novos fiéis. Nosso "
+"compromisso é com o leitor, oferecendo informações fidedignas, com base em "
+"documentos oficiais da Igreja."
+msgstr ""
+"Our goal is also to facilitate access to reliable information on Catholic "
+"tradition, allowing Santapedia to be used as a reference for research and "
+"study, and as a tool for the catechesis of new believers. Our commitment is "
+"to the reader, offering trustworthy information based on official Church "
+"documents."
+
+#: .\articles\templates\htmls\santapedia.html:103
+msgid ""
+"\"Almejamos que a Santapédia cresça continuamente, tornando-se uma "
+"referência digital para fiéis, estudantes e pesquisadores.\""
+msgstr ""
+"\"We hope that Santapedia will grow continuously, becoming a digital "
+"reference for the faithful, students, and researchers.\""
+
+#: .\articles\templates\htmls\santapedia.html:108
+msgid "O que você vai encontrar aqui"
+msgstr "What you will find here"
+
+#: .\articles\templates\htmls\santapedia.html:112
+msgid "Biografias de santos e beatos;"
+msgstr "Biographies of saints and blesseds;"
+
+#: .\articles\templates\htmls\santapedia.html:114
+msgid "Orações tradicionais e novenas;"
+msgstr "Traditional prayers and novenas;"
+
+#: .\articles\templates\htmls\santapedia.html:116
+msgid "Datas litúrgicas e festas da Igreja;"
+msgstr "Liturgical dates and Church feasts;"
+
+#: .\articles\templates\htmls\santapedia.html:118
+msgid "Testemunhos de fé e milagres;"
+msgstr "Testimonies of faith and miracles;"
+
+#: .\articles\templates\htmls\santapedia.html:120
+msgid "Frases e ensinamentos inspiradores."
+msgstr "Inspirational quotes and teachings."
+
+#: .\articles\templates\htmls\santapedia.html:129
+msgid "Para sugestôes ou colaborações, entre em contato:"
+msgstr "For suggestions or collaborations, get in touch:"
+
+#: .\articles\templates\htmls\santapedia.html:133
+msgid "Também estamos no Instagram"
+msgstr "We are also on Instagram"
+
+#: .\articles\templates\htmls\search.html:4
+msgid "Santos - Santapédia"
+msgstr "Saints - Santapedia"
+
+#: .\articles\templates\htmls\search.html:36
+msgid "País"
+msgstr "Country"
+
+#: .\articles\templates\htmls\search.html:58
+msgid "Resultados da pesquisa"
+msgstr "Search results"
+
+#: .\articles\templates\htmls\search.html:85
+msgid "Não há artigos com esse nome"
+msgstr "No articles with this name"

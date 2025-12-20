@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Santos - Santapédia' %}{% endblock %}
+
+{% block 'css'%}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+    
+    <!-- Filter button-->
+    <button id="filter">{% trans 'Filtrar pesquisa' %} <i class="bi bi-funnel"></i></button>
+
+    <!-- Filter menu -->
+    <div id="menu-filter">
+        <form method="get" class="filters">
+            <!-- Order filter -->
+            <select name="order">
+                <option disabled value="" {% if not request.GET.order %}selected{% endif %}>{% trans 'Ordenar por' %}</option>
+                <option value="latest" {% if request.GET.order == 'latest' %}selected{% endif %}>{% trans 'Mais recentes' %}</option>
+                <option value="oldest" {% if request.GET.order == 'oldest' %}selected{% endif %}>{% trans 'Mais antigos' %}</option>
+                <option value="name" {% if request.GET.order == 'name' %}selected{% endif %}>{% trans 'Nome' %} (A–Z)</option>
+            </select>
+        
+            <!-- Category filter -->
+            <select name="category">
+                <option disabled value="" {% if not request.GET.category %}selected{% endif %}>{% trans 'Categoria' %}</option>
+                {% for category in categories %}
+                    <option value="{{category}}" {% if request.GET.category == category %}selected{% endif %}>{{category}}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Country filter -->
+            <select name="country">
+                <option disabled value="" {% if not request.GET.country %}selected{% endif %}>{% trans 'País' %}</option>
+                {% for country in countries %}
+                    <option value="{{country}}" {% if request.GET.country == country %}selected{% endif %}>{{country}}</option>
+                {% endfor %}
+            </select>
+
+            <!-- Saint's name filter -->
+            <input type="search" name="title" id="title" class="form-control" placeholder="{% trans 'Nome' %}" {% if request.GET.q %}value="{{request.GET.q}}"{% endif %} {% if request.GET.title %}value="{{request.GET.title}}"{% endif %} >
+
+            <button type="submit" class="search">{% trans 'Filtrar' %}</button>
+
+            <!-- Clean button -->
+            <button type="button" class="clear-btn"><a href="{% url 'saints' %}">{% trans 'Limpar' %}</a></button>
+        </form>
+    </div>
+
+
+    {% if saints %}
+        <!-- If came from saints page -->
+        <h1>{% trans 'Santos' %} ({{ len_articles }})</h1>
+    {% else %}
+        <!-- If came from main search bar-->
+        <h1>{% trans 'Resultados da pesquisa' %} ({{ len_articles }})</h1>
+    {% endif %}
+
+
+    {% if articles %}
+
+        <div class="container">
+            
+                {% for article in articles %}
+                    <!-- Saint card -->
+                    <a href="http://127.0.0.1:8000/articles/{{article.slug}}/" class="article">
+                        <div class="media">
+                                <div class="media-body">
+                                    {% if request.LANGUAGE_CODE == 'en' %}
+                                        <h5 class="mt-0 mb-1">{{ article.title_en }}</h5>
+                                        <p>{{ article.description_en }}</p>
+                                        <p>{{ article.content_en|truncatechars_html:500|safe }}</p>
+                                    {% else %}
+                                        <h5 class="mt-0 mb-1">{{ article.title_pt }}</h5>
+                                        <p>{{ article.description_pt }}</p>
+                                        <p>{{ article.content_pt|truncatechars_html:500|safe }}</p>
+                                    {% endif %}
+                                    
+                                </div>
+                                    {% if request.LANGUAGE_CODE == 'en' %}
+                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_en }}">
+                                    {% else %}
+                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_pt }}">
+                                    {% endif %}
+                                
+                        </div>
+                    </a>
+                {% endfor %}
+
+        </div>
+
+    {% else %}
+
+        <!-- Don't exist any saint -->
+        <p>{% trans 'Não há artigos com esse nome' %}</p>
+        
+    {% endif %}
+
+    <script>
+        // Animation of appear and disappear the menu filter
+        document.addEventListener('DOMContentLoaded', function() {
+
+            var button_filter = document.getElementById("filter")
+            var menu_filter = document.getElementById("menu-filter")
+
+            button_filter.addEventListener('click', function() {
+                if (menu_filter.style.display === '' || menu_filter.style.display === 'none') {
+                    menu_filter.style.display = 'block'
+                } else {
+                    menu_filter.style.display = 'none'
+                }
+            })
+
+        })
+    </script>
+
+{% endblock %}

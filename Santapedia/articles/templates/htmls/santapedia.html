@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Sobre a Santapédia' %}{% endblock %}
+
+{% block 'css'%}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+    <!-- About Santapedia -->    
+    <h1>{% trans 'Sobre a Santapédia' %}</h1>
+
+    <article id="article">
+
+        <!--  Main info --> 
+        <div class="personal-data">
+            <table>
+                <tr><th id="title" colspan="2">{% trans 'Santapédia' %}</th></tr>
+                <tr>
+                    {% if request.LANGUAGE_CODE == 'en' %}
+                        <th colspan="2"><img src="{% static 'img/logo-3-en.png' %}" alt="{% trans 'Logo da Santapédia' %}"></th>
+                    {% else %}
+                        <th colspan="2"><img src="{% static 'img/logo-3.png' %}" alt="{% trans 'Logo da Santapédia' %}"></th>
+                    {% endif %}
+                    
+                </tr>
+                <tr>
+                    <th>Slogan</th>
+                    <th><em>"{% trans 'A enciclopédia católica' %}"</em></th>
+                </tr>
+                <tr>
+                    <th>{% trans 'Data de Lançamento' %}</th>
+                    <th>{% trans '01 de Janeiro' %}</th> 
+                </tr>
+                <tr>
+                    <th>{% trans 'Criador' %}</th>
+                    <th> Arthur D. Loch <a href="https://github.com/ArthurLoch" target="_blank"><i class="bi bi-github"></i></a></th>
+                </tr>
+                
+                <tr>
+                    <th>{% trans 'Redes Sociais' %}</th>
+                    <th><a href="#">Instagram <i class="bi bi-instagram"></i></a></th>
+                </tr>
+                <tr>
+                    <th>{% trans 'Endereço Eletrônico' %}</th>
+                    <th><a href="http://127.0.0.1:8000/articles/home/">santapedia.com</a></th>
+                </tr>
+            </table>
+        
+        </div>
+
+        <div class="content">
+        <!-- Content --> 
+            
+            <p>
+                {% trans 'A <strong>Santapédia</strong> é uma enciclopédia católica online focada em espalhar conhecimento sobre a vida dos Santos, Beatos e da Igreja Católica. Criada para reunir e organizar informações sobre aqueles que marcaram a história da nossa Igreja. Seu objetivo é tornar acessível, em formato digital, o testemunho de fé e virtude que inspira milhões de pessoas.' %}
+            </p>
+
+            <section>
+                <h2>{% trans 'Criação' %}</h2>
+                <!-- Creation --> 
+
+                <p>
+                     {% trans 'A criação da Santapédia surge como uma iniciativa de um adolescente apaixonado por tecnologia e pela fé cristã, que decidiu unir linhas de código e espiritualidade em um único projeto. Foi também criada com o intuito de ser uma ferramenta de evangelização, para que católicos de todos os lugares do mundo possam descobrir e se aprofundar mais na história e cultura da sua própria religião.' %}
+                </p>
+
+                <h3 style="font-size: 1.5rem;">{% trans 'Inspirações' %}</h3>
+                <!-- Inspirations --> 
+
+                    <p>
+                        {% trans 'A criação desta plataforma teve originalmente várias inspirações. No nome "Santapédia" e na estrutura do site há uma clara inspiração a <a href="https://www.wikipedia.org/" target="_blank">Wikipédia</a>, a inciclopédia livre que proporciona a humanidade transmitir conhecimentos através de artigos, assim, também é o objetivo da Santapédia.' %}
+                    </p>
+                    <p>
+                        {% trans 'Outra inspiração foi a de <a href="http://127.0.0.1:8000/articles/sao-carlo-acutis/">São Carlo Acutis</a>, o Padroeiro da Internet, santo católico que criou o site <a href="https://www.miracolieucaristici.org/" target="_blank">www.miracolieucaristici.org</a>, site focado em mostrar todos os milagres da Santa Eucaristia existentes. Seguindo os legados dele, a Santapédia tenta ter esse sucesso evangelizador mostrando milagres, para que fortaleça a fé do cristão que está lendo.' %}
+                    </p>
+                    <p style="text-align: center;">
+                        <img style="display: inline;" src="{% static 'img/logo-2.png' %}" alt="{% trans 'Medalha de São Bento' %}" width="150" height="150">
+                        {% trans 'Medalha de <a href="http://127.0.0.1:8000/articles/sao-bento/">São Bento' %}</a>.
+                    </p>
+                    <p>
+                        {% trans 'A medalha de São Bento é um símbolo católico de proteção espiritual, fé e bênçãos, conhecida por afastar o mal, a inveja, as tentações e doenças, além de fortalecer a devoção e a conexão com o divino. Com isso, essa medalha faz parte da logo oficial, para que nenhum mal aconteça.' %}
+                    </p>
+                    <div style="display: flex; flex-direction: row; text-align: center;">
+                        <div style="background-color: #0D1F44;"><span style="background-color: white; color: #0D1F44; padding: 2.5px;">#0d1f44</span></div>
+
+                        <div style="background-color: #c6aa2c;"><span style="background-color: black; color: #c6aa2c; padding: 2.5px;">#c6aa2c</span></div>
+                        
+                        <p style="align-content: center; margin-left: 5px;">{% trans 'Cores do manto de <a href="http://127.0.0.1:8000/articles/nossa-senhora-aparecida/">Nossa Senhora Aparecida.' %}</a></p>
+                    </div>
+                    <p>
+                        {% trans 'As cores da nossa logo e da estrutura do nosso site, o azul e o dourado, foram inspirados nas cores do manto de Nossa Senhora Aparecida, a padroeira do Brasil. Para que fiquemos sob a proteção da nossa Santa Mãe.' %}
+                    </p>
+            </section>
+
+            <section>
+                <h2>{% trans 'Missão' %}</h2>
+                <!-- Mission --> 
+
+                <p>
+                    {% trans 'A nossa missão é compartilhar a vida exemplar de cada santo e beato, narrando sua jornada até o reconhecimento da Igreja, buscando ser fonte de inspiração e conhecimento para católicos e para todos que se interessam pela história da Igreja. Também mostramos os milagres que eles já proporcionaram na vida das pessoas, apresentando santos pouco conhecidos, para inspirar novas devoções e fortalecer a fé.' %}
+                </p>
+                <p>
+                    {% trans 'Nosso objetivo também é facilitar o acesso a informações confiáveis sobre a tradição católica, permitindo que a Santapédia seja usada como referência de pesquisa e estudo e instrumento para a catequização de novos fiéis. Nosso compromisso é com o leitor, oferecendo informações fidedignas, com base em documentos oficiais da Igreja.' %}
+                </p>
+                <p>
+                    <em>{% trans '"Almejamos que a Santapédia cresça continuamente, tornando-se uma referência digital para fiéis, estudantes e pesquisadores."' %}</em>
+                </p>
+            </section>
+
+            <section>
+                <h2>{% trans 'O que você vai encontrar aqui' %}</h2>
+                <!-- What you will find here --> 
+
+                <ul>
+                    <li>{% trans 'Biografias de santos e beatos;' %}</li>
+
+                    <li>{% trans 'Orações tradicionais e novenas;' %}</li>
+
+                    <li>{% trans 'Datas litúrgicas e festas da Igreja;' %}</li>
+
+                    <li>{% trans 'Testemunhos de fé e milagres;' %}</li>
+
+                    <li>{% trans 'Frases e ensinamentos inspiradores.' %}</li>
+                </ul>
+            </section>
+
+            <section>
+                <h2>{% trans 'Contato' %}</h2>
+                <!-- Conatact --> 
+
+                <p>
+                    {% trans 'Para sugestôes ou colaborações, entre em contato:' %}
+                    <a href="{% url 'contact' %}">santapedia.contato@gmail.com</a>
+                </p>
+                <p>
+                    {% trans 'Também estamos no Instagram' %}: <a href="#">@santapedia</a>
+                </p>
+            </section>
+        </div>
+        
+    </article>
+
+
+{% endblock %}

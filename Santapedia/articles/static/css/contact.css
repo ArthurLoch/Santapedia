@@ -1,0 +1,56 @@
+@charset "UTF-8";
+
+:root {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #f7f7f7;
+    --color-7: #ffffff;
+    --color-8: #000000;
+    --color-9: #555555;
+}
+body.dark-mode {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #2a2a2a;
+    --color-7: #000000;
+    --color-8: #ffffff;
+    --color-9: #a1a1a1;
+}
+div.container{
+    margin-top: 20px;
+}
+h1{
+    text-align: center;
+}
+form#contact{
+    display: grid;
+    width: 311.5px;
+    margin: auto;
+    text-align: left;
+}
+p input{
+    width: 310px;
+}
+p textarea{
+    width: 310px;
+}
+button#submit{
+    background-color: var(--color-1);
+    width: auto;
+    border: 3px solid var(--color-3);
+    color: var(--color-3);
+    display: block;
+    margin: auto;
+}
+button#submit:hover{
+    background-color: var(--color-2);
+}
+button.close:hover{
+    background-color: transparent;
+}

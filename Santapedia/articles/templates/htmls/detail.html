@@ -1,0 +1,209 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
+        {{article.title_en}}
+    {% else %}
+        {{article.title_pt}}
+    {% endif %}
+  - {% trans 'Santapédia' %} 
+{% endblock %}
+
+{% block 'css' %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+    <nav class="article-index">
+        <p><strong>{% trans 'Neste artigo' %}:</strong></p>
+        <ul id="toc-list"></ul>
+    </nav>
+
+    <h1>
+    {% if request.LANGUAGE_CODE == 'en' %}
+        {{article.title_en}}
+    {% else %}
+        {{article.title_pt}}
+    {% endif %}
+    </h1>
+
+    <p class="date">{% trans 'PUBLICADO' %}:
+    {% if request.LANGUAGE_CODE == 'en' %}
+        {{article.created_at.month}}/{{article.created_at.day}}/{{article.created_at.year}}</p>
+    {% else %}
+        {{article.created_at.day}}/{{article.created_at.month}}/{{article.created_at.year}}</p>
+    {% endif %}
+    
+
+    <article id="article">
+        <!-- Saint's data -->
+        <div class="personal-data">
+            <table>
+                <tr><th id="title" colspan="2">
+                {% if request.LANGUAGE_CODE == 'en' %}
+                    {{article.title_en}}
+                {% else %}
+                    {{article.title_pt}}
+                {% endif %}
+                </th></tr>
+                <tr>
+                    {% if article.image %}
+                        <th colspan="2" id="img"><img src="{{ article.image.url }}" alt="Imagem de {{ article.title }}"></th>
+                    {% else %}
+                        <th>
+                            <p>{% trans 'Sem imagem disponível' %}.</p>
+                        </th>
+                    {% endif %}
+                </tr>
+                {% if article.born_date or article.born_date_text_pt or article.born_date_text_en %}
+                    <tr>
+                        <th>{% trans 'Nascimento' %}</th>
+                        {% if article.born_date %}
+                            {% if request.LANGUAGE_CODE == 'en' %}
+                                <th>{{article.born_date}}. {% if article.birth_place_en %} {{article.birth_place_en}} {% endif %}</th>
+                            {% else %}
+                                <th>{{article.born_date}}. {% if article.birth_place_pt %} {{article.birth_place_pt}} {% endif %}</th>
+                            {% endif %}
+                            
+                        {% else %}
+                            {% if request.LANGUAGE_CODE == 'en' %}
+                                <th>{{article.born_date_text_en}}. {% if article.birth_place_en %} {{article.birth_place_en}} {% endif %}</th>
+                            {% else %}
+                            <th>{{article.born_date_text_pt}}. {% if article.birth_place_pt %} {{article.birth_place_pt}} {% endif %}</th>
+                            {% endif %}
+                            
+                        {% endif %}
+                    </tr>
+                {% endif %}
+
+                {% if article.death_date or article.death_date_text_pt or article.death_date_text_en %}
+                    <tr>
+                        <th>{% trans 'Morte' %}</th>
+                        {% if article.death_date %}
+                            {% if request.LANGUAGE_CODE == 'en' %}
+                                <th>{{article.death_date}}. {% if article.death_place_en %} {{article.death_place_en}} {% endif %}</th>
+                            {% else %}
+                                <th>{{article.death_date}}. {% if article.death_place_pt %} {{article.death_place_pt}} {% endif %}</th>
+                            {% endif %}
+                            
+                        {% else %}
+                            {% if request.LANGUAGE_CODE == 'en' %}
+                                <th>{{article.death_date_text_en}}. {% if article.death_place_en %} {{article.death_place_en}} {% endif %}</th>
+                            {% else %}
+                                <th>{{article.death_date_text_pt}}. {% if article.death_place_pt %} {{article.death_place_pt}} {% endif %}</th>
+                            {% endif %}
+                            
+                        {% endif %}
+                    </tr>
+                {% endif %}
+
+
+                {% if request.LANGUAGE_CODE == 'en' %}
+                    {% if article.canonization_date or article.canonization_date_text_en %}
+                        <tr>
+                            <th>{% trans 'Canonização' %}</th>
+                            {% if article.canonization_date %}
+                                <th>{{article.canonization_date}}</th>
+                            {% else %}
+                                <th>{{article.canonization_date_text_en}}</th>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    {% if article.canonization_date or article.canonization_date_text_pt %}
+                        <tr>
+                            <th>{% trans 'Canonização' %}</th>
+                            {% if article.canonization_date %}
+                                <th>{{article.canonization_date}}</th>
+                            {% else %}
+                                <th>{{article.canonization_date_text_pt}}</th>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
+                {% endif %}
+
+
+
+
+
+
+                {% if article.feast_day %}
+                    <tr>
+                        <th>{% trans 'Dia Festivo' %}</th>
+                        <th id="feast_day"></th>
+                    </tr>
+                {% endif %}
+
+                {% if request.LANGUAGE_CODE == 'en' %}
+                    {% if article.patronages_en %}
+                        <tr>
+                            <th>{% trans 'Padroeiro(a)' %}</th>
+                            <th>{{article.patronages_en}}</th>
+                        </tr>
+                    {% endif %}
+                {% else %}
+                    {% if article.patronages_pt %}
+                        <tr>
+                            <th>{% trans 'Padroeiro(a)' %}</th>
+                            <th>{{article.patronages_pt}}</th>
+                        </tr>
+                    {% endif %}
+                {% endif %}
+
+            </table>
+        
+        </div>
+
+        <div class="content">
+            <!-- Full content -->
+            {% if request.LANGUAGE_CODE == 'en' %}
+                {{article.content_en|safe}}
+            {% else %}
+                {{article.content_pt|safe}}
+            {% endif %}
+
+            <!-- Prayer -->
+            {% if request.LANGUAGE_CODE == 'en' %}
+                {% if article.quotes_en %}
+                    <h2 id="quotes">{% trans 'Oração' %}</h2>
+                    {{article.quotes_en|safe}}
+                {% endif %}
+            {% else %}
+                {% if article.quotes_pt %}
+                    <h2 id="quotes">{% trans 'Oração' %}</h2>
+                    {{article.quotes_pt|safe}}
+                {% endif %}
+            {% endif %}
+            
+
+            <!-- Bibliografy -->
+            {% if request.LANGUAGE_CODE == 'en' %}
+                {% if article.sources_en %}
+                    <h2 id="sources">{% trans 'Bibliografia' %}</h2>
+                    {{article.sources_en|safe}}
+                {% endif %}
+            {% else %}
+                {% if article.sources_pt %}
+                    <h2 id="sources">{% trans 'Bibliografia' %}</h2>
+                    {{article.sources_pt|safe}}
+                {% endif %}
+            {% endif %}
+        </div>
+        
+    </article>
+     
+
+
+    <script>
+        window.feastDay = {
+            month: '{{ article.feast_day.month }}',
+            day:   '{{ article.feast_day.day }}'
+        };
+        window.currentLanguage = '{{ request.LANGUAGE_CODE }}'
+    </script>
+    <script src="{% static 'js/detail.js' %}"></script>
+
+{% endblock %}

@@ -1,0 +1,102 @@
+@charset "UTF-8";
+
+:root {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #f7f7f7;
+    --color-7: #ffffff;
+    --color-8: #000000;
+    --color-9: #555555;
+}
+body.dark-mode {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #2a2a2a;
+    --color-7: #000000;
+    --color-8: #ffffff;
+    --color-9: #a1a1a1;
+}
+.fc .fc-toolbar-title {
+    font-size: 1.5em;
+}
+.fc-dayGridMonth-view{
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.35);
+}
+button{
+    width: auto;
+}
+.fc .fc-button-primary {
+    background-color: var(--color-1);
+    border-color: var(--color-1);
+    color: var(--color-3);
+}
+.fc .fc-button-primary:disabled {
+    background-color: var(--color-1);
+    border-color: var(--color-1);
+    color: var(--color-3);
+}
+div.fc-button-group button{
+    background-color: var(--color-1);
+}
+.fc .fc-button-primary:hover, .fc .fc-button-primary:active{
+    background-color: var(--color-2);
+    border-color: var(--color-2);
+    color: var(--color-3);
+}
+div.fc-button-group button:hover, div.fc-button-group button:active{
+    background-color: var(--color-2);
+}
+button.fc-today-button{
+    background-color: var(--color-3);
+}
+button.fc-today-button:hover{
+    background-color: var(--color-4);
+}
+
+.fc-scrollgrid-sync-inner{
+    background-color: var(--color-1);
+}
+.fc-scrollgrid-sync-inner a{
+    color: var(--color-3);
+}
+
+td div.fc-daygrid-day-frame{
+    background-color: rgb(183, 201, 251);
+}
+td a.fc-daygrid-day-number{
+    color: var(--color-1);
+}
+td.fc-day-today div{
+    background-color: var(--color-1);
+}
+td.fc-day-today a{
+    color: var(--color-3);
+}
+
+a.fc-h-event{
+    background-color: var(--color-5);
+    border: 1px solid var(--color-5);
+}
+a.fc-h-event:hover{
+    background-color: var(--color-3);
+    border-color: var(--color-3);
+}
+div#saints-list{
+    background-color: var(--color-6);
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
+}
+div#saints-list a:hover{
+    text-decoration: none;
+}
+div#saints-list p{
+    margin-bottom: 0px;
+}
+img.rounded{
+    margin-right: 10px;
+}

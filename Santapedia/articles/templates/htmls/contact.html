@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Contato' %} - {% trans 'Santapédia' %}{% endblock %}
+
+{% block 'css' %}
+    <link rel="stylesheet" href="{% static 'css/contact.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+    <div class="container">
+        {% if success %}
+            <!-- Success alert -->
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {% trans 'Mensagem enviada com sucesso!' %}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endif %}
+
+        <h1 id="email">{% trans 'Enviar um email' %}</h1>
+
+        <form action="" method="post" id="contact">
+            {% csrf_token %}
+            {% for i in form %}
+                <!-- Inputs -->
+                <p>
+                    {{ i.label }}
+                    {{ i }}
+                </p>
+            {% endfor %}
+            <button type="submit" id="submit">{% trans 'Enviar' %}</button>
+        </form>
+    </div>
+
+{% endblock %}

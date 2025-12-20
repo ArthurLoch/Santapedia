@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Calendário Litúrgico' %}{% endblock %}
+
+{% block 'css' %}
+    <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+<div class="container mt-5 mb-5">
+  <h1 class="text-center mb-4">{% trans 'Calendário Litúrgico dos Santos' %}</h1>
+
+  <div class="row">
+    <!-- Calendar -->
+    <div class="col-lg-8 col-md-12 mb-4">
+      <div id="calendar" style="max-width: 900px; margin: 0 auto;"></div>
+    </div>
+
+    <!-- Saints' list by month -->
+    <div class="col-lg-4 col-md-12">
+      <div class="card shadow-sm border-0">
+        <div class="card-header bg-warning text-dark fw-bold text-center">
+          {% trans 'Santos deste mês' %}
+        </div>
+        <div id="saints-list" class="card-body" style="max-height: 500px; overflow-y: auto;">
+          <p class="text-center text-muted">{% trans 'Carregando santos...' %}</p>
+        </div>        
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FullCalendar CSS -->
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+
+<!-- FullCalendar JS -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+
+<script>
+  window.currentLanguage = '{{ request.LANGUAGE_CODE }}'
+</script>
+
+<script src="{% static 'js/calendar.js' %}"></script>
+  
+{% endblock %}

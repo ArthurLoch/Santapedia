@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Padroeiro da Cidade' %}{% endblock %}
+
+{% block 'css'%}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+<!-- Filter -->
+<div id="menu-cities">
+    <form method="get" class="filters">
+        <!-- Country filter-->
+        <select name="country" id="country">
+            <option value="" disabled {% if not request.GET.country %}selected{% endif %}>
+                {% trans "Escolha o país" %}
+            </option>
+            {% for country in countries %}
+                <option value="{{ country.id }}"
+                    {% if request.GET.country == country.id|stringformat:"s" %}selected{% endif %}>
+                        {% if request.LANGUAGE_CODE == 'en' %}
+                            {{ country.name_en }}
+                        {% else %}
+                            {{country.name_pt }}
+                        {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+
+       <select name="state" id="state">
+            <option value="" disabled selected>{% trans "Escolha o estado" %}</option>
+            {% for state in states %}
+                <option value="{{ state.abbreviation }}"
+                    {% if request.GET.state == state.abbreviation|stringformat:"s" %}selected{% endif %}>
+                    {{ state.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="city" id="city">
+            <option value="" disabled selected>{% trans "Escolha a cidade" %}</option>
+            {% for city in cities %}
+                <option value="{{ city.id }}"
+                    {% if request.GET.city == city.id|stringformat:"s" %}selected{% endif %}>
+                    {{ city.name }}
+                </option>
+            {% endfor %}
+        </select>
+
+
+        <button type="submit" class="search">{% trans 'Filtrar' %}</button>
+
+        <!-- Clean button -->
+        <button type="button" class="clear-btn"><a href="{% url 'patronized_cities' %}">{% trans 'Limpar' %}</a></button>
+    </form>
+</div>
+
+<div class="container py-4">
+    <h1>{% trans 'Santo Padroeiro' %}:</h1>
+
+    {% if saints %}
+        {% for saint in saints %}
+            <!-- Patron -->
+            <a href="http://127.0.0.1:8000/articles/{{saint.slug}}/" class="article">
+                <div class="media">
+                        <div class="media-body">
+                            {% if request.LANGUAGE_CODE == 'en' %}
+                                <h5 class="mt-0 mb-1">{{ saint.title_en }}</h5>
+                                <p>{{ saint.description_en }}</p>
+                                <p>{{ saint.content_en|truncatechars_html:500|safe }}</p>
+                            {% else %}
+                                <h5 class="mt-0 mb-1">{{ saint.title_pt }}</h5>
+                                <p>{{ saint.description_pt }}</p>
+                                <p>{{ saint.content_pt|truncatechars_html:500|safe }}</p>
+                            {% endif %}
+                        </div>
+                        <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title }}">
+                </div>
+            </a>
+        {% endfor %}
+    {% else %}
+        <p>{% trans 'Nenhum santo encontrado' %}</p>
+    {% endif %}
+</div>
+    
+<script>
+const djangoVars = {
+    getCitiesUrl: "{% url 'get_cities_by_state' %}",
+    getStatesUrl: "{% url 'get_states_by_country' %}",
+    selectedCountry: "{{ request.GET.country|default:'' }}",
+    selectedState: "{{ request.GET.state|default:'' }}",
+    selectedCity: "{{ request.GET.city|default:''|escapejs }}"
+};
+window.currentLanguage = '{{ request.LANGUAGE_CODE }}'
+</script>
+<script src="{% static 'js/patronized_cities.js' %}"></script>
+
+{% endblock %}
