@@ -1,0 +1,312 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
+        Política de Privacidade – Santapédia
+    {% else %}
+        Privacy Policy – Santapedia
+    {% endif %}
+{% endblock %}
+
+{% block 'css' %}
+    <link rel="stylesheet" href="{% static 'css/detail.css' %}">
+{% endblock %}
+
+{% block 'body' %}
+
+    {% if request.LANGUAGE_CODE == 'en' %}
+        
+        <h1>Privacy Policy – Santapedia</h1>
+
+        <p>Last updated: 12/23/2025</p>
+
+        <p>Santapedia respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, store, and protect information from visitors and users of santapedia.org.</p>
+
+        <p>This policy complies with the General Data Protection Regulation (GDPR) and other applicable data protection laws.</p>
+
+        <h2>1. Who we are</h2>
+
+        <p>Santapedia is an educational and cultural project dedicated to sharing information about saints, prayers, and Christian tradition, available in Portuguese and English.</p>
+
+        <h2>2. Data we collect</h2>
+
+        <h3>2.1 Data provided by users</h3>
+
+        <ul>
+            <li>Username</li>
+
+            <li>Email address</li>
+
+            <li>Login information (when applicable)</li>
+        </ul>
+
+        <h3>2.2 Data collected automatically</h3>
+
+        <ul>
+            <li>Anonymized IP address</li>
+
+            <li>Browser type</li>
+
+            <li>Operating system</li>
+        
+            <li>Pages visited</li>
+
+            <li>Time spent on the site</li>
+
+            <li>Approximate location</li>
+        </ul>
+        
+        <p>Collected through Google Analytics.</p>
+
+        <h2>3. Cookies</h2>
+
+        <p>We use cookies to:</p>
+
+        <ul>
+            <li>Analyze traffic and performance</li>
+
+            <li>Improve user experience</li>
+        </ul>
+
+        <p>Users may accept or refuse cookies via the cookie banner.</p>
+
+        <h2>4. Google Analytics</h2>
+
+        <p>We use Google Analytics 4 (GA4) provided by Google LLC.</p>
+
+        <ul>
+            <li>IP anonymization enabled</li>
+
+            <li>Data used for statistical purposes only</li>
+        </ul>
+
+        <p>Learn more: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></p>
+
+        <h2>5. Purpose of data processing</h2>
+
+        <p>Data is used to:</p>
+
+        <ul>
+            <li>Operate and maintain the website</li>
+
+            <li>Improve content and features</li>
+
+            <li>Analyze usage metrics</li>
+
+            <li>Ensure security</li>
+            
+            <li>Manage user accounts</li>
+        </ul>
+
+        <h2>6. Data sharing</h2>
+
+        <p>Santapedia does not sell or rent personal data. Data may be shared only:</p>
+
+        <ul>
+            <li>When legally required</li>
+
+            <li>With essential service providers (e.g., Google Analytics)</li>
+        </ul>
+
+        <h2>7. Data security</h2>
+
+        <p>We apply appropriate technical and organizational measures to protect personal data.</p>
+
+        <h2>8. User rights</h2>
+
+        <p>Users have the right to:</p>
+
+        <ul>
+            <li>Access their data</li>
+
+            <li>Request correction or deletion</li>
+
+            <li>Withdraw consent</li>
+
+            <li>Request data portability</li>
+        </ul>
+
+        <h2>9. Data retention</h2>
+
+        <p>Personal data is retained only as long as necessary or legally required.</p>
+
+        <h2>10. External links</h2>
+
+        <p>We are not responsible for the privacy practices of external websites.</p>
+
+        <h2>11. Policy updates</h2>
+
+        <p>This Privacy Policy may be updated periodically.</p>
+
+        <h2>12. Contact</h2>
+
+        <p>📧 Email: <a href="/en/contact/">contato@santapedia.org</a> </p>
+
+    {% else %}
+        
+        <h1>Política de Privacidade – Santapédia</h1>
+
+        <p>Última atualização: 23/12/2025</p>
+
+        <p>A Santapedia valoriza a privacidade e a proteção dos dados pessoais de seus usuários. Esta Política de Privacidade descreve como coletamos, usamos, armazenamos e protegemos as informações pessoais dos visitantes e usuários do site santapedia.org.</p>
+
+        <p>Esta política está em conformidade com a Lei Geral de Proteção de Dados (LGPD – Lei nº 13.709/2018), com o Regulamento Geral de Proteção de Dados da União Europeia (GDPR) e demais legislações aplicáveis.</p>
+
+        <h2>1. Quem somos</h2>
+
+        <p>Santapedia é um projeto educacional e cultural dedicado à divulgação de informações sobre santos, orações e tradição cristã, com conteúdo disponível em português e inglês.</p>
+
+        <h2>2. Dados que coletamos</h2>
+
+        <p>Podemos coletar os seguintes dados:</p>
+
+        <h3>2.1 Dados fornecidos pelo usuário</h3>
+        
+
+        <ul>
+            <li>Nome de usuário</li>
+
+            <li>Endereço de e-mail</li>
+
+            <li>Informações de login (quando aplicável)</li>
+        </ul>
+
+        <p>Esses dados são coletados apenas quando o usuário cria uma conta ou interage com funcionalidades que exigem autenticação.</p>
+
+        <h3>2.2 Dados coletados automaticamente</h3>
+
+        <ul>
+            <li>Endereço IP (anonimizado)</li>
+
+            <li>Tipo de navegador</li>
+
+            <li>Sistema operacional</li>
+
+            <li>Páginas visitadas</li>
+            
+            <li>Tempo de permanência no site</li>
+
+            <li>Localização aproximada (país/cidade)</li>
+        </ul>
+
+        <p>Esses dados são coletados por meio do Google Analytics.</p>
+
+        <h2>3. Uso de cookies</h2>
+
+        <p>Utilizamos cookies para:</p>
+
+        <ul>
+            <li>Análise de tráfego e desempenho do site</li>
+
+            <li>Melhorar a experiência do usuário</li>
+        </ul>
+
+        <h3>3.1 Cookies utilizados</h3>
+
+        <ul>
+            <li>Cookies analíticos (Google Analytics)</li>
+        </ul>
+
+        <p>O Google Analytics utiliza cookies para coletar informações de forma anonimizada, não permitindo a identificação direta do usuário.</p>
+
+        <p>O usuário pode, a qualquer momento, aceitar ou recusar cookies por meio do banner exibido ao acessar o site.</p>
+
+        <h2>4. Google Analytics</h2>
+
+        <p>Utilizamos o Google Analytics 4 (GA4), um serviço de análise fornecido pela Google LLC.</p>
+
+        <ul>
+            <li>Os dados coletados são anonimizados</li>
+
+            <li>O endereço IP é mascarado</li>
+
+            <li>As informações são utilizadas exclusivamente para fins estatísticos</li>
+        </ul>
+
+        <p>Saiba mais em: <a href="https://policies.google.com/privacy">https://policies.google.com/privacy</a></p>
+
+        <h2>5. Finalidade do tratamento dos dados</h2>
+
+        <p>Os dados coletados são utilizados para:</p>
+
+        <ul>
+            <li>Operar e manter o site</li>
+
+            <li>Melhorar conteúdo e funcionalidades</li>
+
+            <li>Analisar métricas de acesso</li>
+
+            <li>Garantir segurança e prevenir abusos</li>
+
+            <li>Gerenciar contas de usuários (quando houver login)</li>
+        </ul>
+
+        <h2>6. Compartilhamento de dados</h2>
+
+        <p>A Santapedia não vende, aluga ou compartilha dados pessoais com terceiros, exceto:</p>
+
+        <ul>
+            <li>Quando exigido por lei</li>
+
+            <li>Com provedores de serviço essenciais (ex: Google Analytics)</li>
+        </ul>
+
+        <h2>7. Armazenamento e segurança</h2>
+
+        <p>Adotamos medidas técnicas e organizacionais adequadas para proteger os dados pessoais contra:</p>
+
+        <ul>
+            <li>Acesso não autorizado</li>
+
+            <li>Alteração</li>
+
+            <li>Divulgação</li>
+
+            <p>Destruição</p>
+        </ul>
+
+        <p>Os dados são armazenados em servidores seguros e protegidos.</p>
+
+        <h2>8. Direitos do usuário</h2>
+
+        <p>De acordo com a LGPD e o GDPR, o usuário tem direito a:</p>
+
+        <ul>
+            <li>Confirmar a existência de tratamento de dados</li>
+
+            <li>Acessar seus dados</li>
+
+            <li>Corrigir dados incompletos ou incorretos</li>
+
+            <li>Solicitar exclusão de dados</li>
+
+            <li>Revogar consentimento</li>
+
+            <li>Solicitar portabilidade</li>
+        </ul>
+
+        <p>Para exercer seus direitos, entre em contato conosco.</p>
+
+        <h2>9. Retenção de dados</h2>
+
+        <p>Os dados pessoais serão mantidos apenas pelo tempo necessário para cumprir as finalidades descritas nesta política ou conforme exigido por lei.</p>
+
+        <h2>10. Links para sites externos</h2>
+
+        <p>O site pode conter links para sites externos. A Santapedia não se responsabiliza pelas políticas de privacidade de terceiros.</p>
+
+        <h2>11. Alterações nesta política</h2>
+
+        <p>Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que o usuário revise este documento regularmente.</p>
+
+        <h2>12. Contato</h2>
+
+        <p>Em caso de dúvidas ou solicitações relacionadas a esta Política de Privacidade ou ao tratamento de dados pessoais, entre em contato:</p>
+
+        <p>📧 E-mail: <a href="/pt-br/contact">santapedia.contato@gmail.com</a></p>
+
+    {% endif %}
+
+{% endblock %}

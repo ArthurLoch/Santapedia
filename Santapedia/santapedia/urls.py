@@ -34,6 +34,7 @@ urlpatterns += i18n_patterns(
     path('prayers/', views.prayers, name='prayers'),
     path('santapedia/', views.santapedia, name='santapedia'),
     path('contact/', views.contact, name='contact'),
+    path('privacy_policy/', views.privacy_policy, name='privacy_policy'),
     path('search-suggestions/', views.search_suggestions, name='search_suggestions'),
     path('aleatory/', views.aleatory, name='aleatory'),
     path('patronized_cities/', views.patronized_cities, name='patronized_cities'),

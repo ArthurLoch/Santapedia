@@ -379,3 +379,6 @@ def contact(request):
         form = ContactForm()
 
     return render(request, 'htmls/contact.html', {'form': form, 'success': success})
+
+def privacy_policy(request):
+    return render(request, 'htmls/privacy_policy.html')
