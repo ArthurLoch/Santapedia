@@ -7,172 +7,195 @@ from django.conf import settings
 from .forms import ContactForm
 from django.core.mail import EmailMessage
 from django.db.models.functions import Lower
-from datetime import date, datetime
+from datetime import date
+from django.contrib.postgres.search import SearchQuery, SearchRank
+from django.db.models import F
+from django.views.decorators.cache import cache_page
 
+@cache_page(60 * 10)
 def home(request):
-    articles = Article.objects.all()
-    len_saints = len(articles)
-    articles = articles.order_by('title')
+    articles = (Article.objects.only('id','title_pt', 'title_en', 'description_pt', 'description_en', 'content_pt', 'content_en', 'slug', 'image').order_by('title_pt')[:5])
 
-    saints = []
-    for article in articles:
-        saints.append(article)
-        if len(saints) == 5:
-            break
+    prayers = (Prayer.objects.select_related('saint').only('id','title_pt', 'title_en', 'content_pt', 'content_en', 'saint__id', 'saint__title_pt', 'saint__title_en', 'saint__image').order_by('title_pt')[:5])
 
-    articles = Prayer.objects.all()
-    len_prayers = len(articles)
-    articles = articles.order_by('title')
+    return render(request, 'htmls/home.html', {'saints': articles, 'len_saints': Article.objects.count(), 'len_prayers': Prayer.objects.count(), 'prayers': prayers})
 
-    prayers = []
-    for article in articles:
-        prayers.append(article)
-        if len(prayers) == 5:
-            break
-
-    return render(request, 'htmls/home.html', {'saints': saints, 'len_saints': len_saints, 'len_prayers': len_prayers, 'prayers': prayers})
-
+@cache_page(60 * 10)
 def saints(request):
-    
+    lang = request.LANGUAGE_CODE
+    title_field = "title_en" if lang == "en" else "title_pt"
+    country_field = "country_en" if lang == "en" else "country_pt"
+    category_field = "category_en" if lang == "en" else "category_pt"
+    vector_field = "search_vector_en" if lang == "en" else "search_vector_pt"
+
     articles = Article.objects.all()
-    countries = []
-    categories = []
 
-    for article in articles:
-        if request.LANGUAGE_CODE == 'en':
-            if article.country_en:
-                if article.country_en not in countries:
-                    countries.append(article.country_en)
+    # ======================
+    # Filtros
+    # ======================
+    order = request.GET.get("order", "")
+    category = request.GET.get("category", "")
+    country = request.GET.get("country", "")
+    title = request.GET.get("q") or request.GET.get("title", "")
 
-            if article.category_en:
-                if article.category_en not in categories:
-                    categories.append(article.category_en)
+    if category:
+        articles = articles.filter(**{category_field: category})
 
-        elif request.LANGUAGE_CODE == 'pt-br':
-            if article.country_pt:
-                if article.country_pt not in countries:
-                    countries.append(article.country_pt)
-                    
-            if article.category_pt:
-                if article.category_pt not in categories:
-                    categories.append(article.category_pt)
+    if country:
+        articles = articles.filter(**{country_field: country})
 
-        
+    if title:
+        query = SearchQuery(title)
+        articles = (
+            articles
+            .annotate(rank=SearchRank(F(vector_field), query))
+            .filter(rank__gt=0)
+            .order_by("-rank")
+        )
 
-    countries.sort()
-    categories.sort()
+    # ======================
+    # Ordenação (NO BANCO)
+    # ======================
+    if order == "latest":
+        articles = articles.order_by("-created_at")
+    elif order == "oldest":
+        articles = articles.order_by("created_at")
+    else:
+        articles = articles.order_by(Lower(title_field))
 
-    if request.method == 'GET':
-        order = request.GET.get('order', '')
-        category = request.GET.get('category', '')
-        country = request.GET.get('country', '')
-        title = request.GET.get('title', '')
-        q = request.GET.get('q', '')
+    # ======================
+    # Filtros do formulário
+    # (SEM iterar objetos)
+    # ======================
+    countries = (
+        Article.objects
+        .exclude(**{country_field: ""})
+        .values_list(country_field, flat=True)
+        .distinct()
+        .order_by(country_field)
+    )
 
-        if q:
-            title = q
+    categories = (
+        Article.objects
+        .exclude(**{category_field: ""})
+        .values_list(category_field, flat=True)
+        .distinct()
+        .order_by(category_field)
+    )
 
-        if category:
-            if request.LANGUAGE_CODE == 'en':
-                articles = articles.filter(category_en=category)
-            else:
-                articles = articles.filter(category_pt=category)
+    return render(
+        request,
+        "htmls/search.html",
+        {
+            "articles": articles,
+            "len_articles": articles.count(),
+            "countries": countries,
+            "categories": categories,
+            "saints": True,
+        },
+    )
 
-        if country:
-            if request.LANGUAGE_CODE == 'en':
-                articles = articles.filter(country_en=country)
-            else:
-                articles = articles.filter(country_pt=country)
-
-        if title:
-            if request.LANGUAGE_CODE == 'en':
-                articles = articles.filter(title_en__icontains=title)
-            else:
-                articles = articles.filter(title_pt__icontains=title)
-
-        if order == 'latest':
-            articles = articles.order_by('-created_at')
-        elif order == 'oldest':
-            articles = articles.order_by('created_at')
-        else:
-            if request.LANGUAGE_CODE == 'en':
-                articles = articles.order_by(Lower('title_en'))
-            elif request.LANGUAGE_CODE == 'pt-br':
-                articles = articles.order_by(Lower('title_pt'))
-
-        
-    return render(request, 'htmls/search.html', {'articles': articles, 'len_articles': len(articles), 'countries': countries, 'categories': categories, 'saints': True})
-
+@cache_page(60 * 10)
 def prayers(request):
-    prayers = Prayer.objects.all()
+    lang = request.LANGUAGE_CODE
 
-    saints = []
-    categories = []
-    for prayer in prayers:
-        if request.LANGUAGE_CODE == 'en':
-            if prayer.saint:
-                if prayer.saint.title_en not in saints:
-                    saints.append(prayer.saint.title_en)
-            if prayer.category_en:
-                if prayer.category_en not in categories:
-                    categories.append(prayer.category_en)
+    title_field = "title_en" if lang == "en" else "title_pt"
+    saint_field = "saint__title_en" if lang == "en" else "saint__title_pt"
+    category_field = "category_en" if lang == "en" else "category_pt"
+    vector_field = "search_vector_en" if lang == "en" else "search_vector_pt"
 
-        elif request.LANGUAGE_CODE == 'pt-br':
-            if prayer.saint:
-                if prayer.saint.title_pt not in saints:
-                    saints.append(prayer.saint.title_pt)
+    prayers = (
+        Prayer.objects
+        .select_related("saint")
+        .only(
+            "id",
+            "title_pt", "title_en",
+            "content_pt", "content_en",
+            "created_at",
+            "category_pt", "category_en",
+            "saint_id",                 # 🔥 ESSENCIAL
+            "saint__title_pt",
+            "saint__title_en",
+            "saint__image",
+        )
+    )
 
-            if prayer.category_pt:
-                if prayer.category_pt not in categories:
-                    categories.append(prayer.category_pt)
+    # ======================
+    # GET params
+    # ======================
+    order = request.GET.get("order", "")
+    category = request.GET.get("category", "")
+    saint = request.GET.get("saint", "")
+    title = request.GET.get("q") or request.GET.get("title", "")
 
-    saints.sort()
-    categories.sort()
+    # ======================
+    # Filtros
+    # ======================
+    if category:
+        prayers = prayers.filter(**{category_field: category})
 
-    if request.method == 'GET':
-        order = request.GET.get('order', '')
-        category = request.GET.get('category', '')
-        saint = request.GET.get('saint', '')
-        title = request.GET.get('title', '')
+    if saint:
+        prayers = prayers.filter(**{saint_field: saint})
 
-        if category:
-            if request.LANGUAGE_CODE == 'en':
-                prayers = prayers.filter(category_en=category)
-            elif request.LANGUAGE_CODE == 'pt-br':
-                prayers = prayers.filter(category_pt=category)   
+    if title:
+        query = SearchQuery(title)
+        prayers = (
+            prayers
+            .annotate(rank=SearchRank(F(vector_field), query))
+            .filter(rank__gt=0)
+            .order_by("-rank")
+        )
 
-        if saint:
-            if request.LANGUAGE_CODE == 'en':
-                prayers = prayers.filter(saint__title_en = saint)
-            elif request.LANGUAGE_CODE == 'pt-br':
-                prayers = prayers.filter(saint__title_pt = saint)
-        
-        if title:
-            if request.LANGUAGE_CODE == 'en':
-                prayers = prayers.filter(title_en__icontains=title)
-            elif request.LANGUAGE_CODE == 'pt-br':
-                prayers = prayers.filter(title_pt__icontains=title)
+    # ======================
+    # Ordenação
+    # ======================
+    if order == "latest":
+        prayers = prayers.order_by("-created_at")
+    elif order == "oldest":
+        prayers = prayers.order_by("created_at")
+    else:
+        prayers = prayers.order_by(Lower(title_field))
 
-        if order == 'latest':
-            prayers = prayers.order_by('-created_at')
-        elif order == 'oldest':
-            prayers = prayers.order_by('created_at')
-        else:
-            if request.LANGUAGE_CODE == 'en':
-                prayers = prayers.order_by(Lower('title_en'))
-            elif request.LANGUAGE_CODE == 'pt-br':
-                prayers = prayers.order_by(Lower('title_pt'))
+    # 🔥 Avalia UMA vez (evita múltiplos hits)
+    prayers = list(prayers)
 
-    return render(request, 'htmls/prayers.html', {'prayers': prayers, 'len_prayers': len(prayers), 'saints': saints, 'categories': categories})
+    # ======================
+    # Filtros do formulário
+    # ======================
+    saints = (
+        Prayer.objects
+        .exclude(saint__isnull=True)
+        .values_list(saint_field, flat=True)
+        .distinct()
+        .order_by(saint_field)
+    )
+
+    categories = (
+        Prayer.objects
+        .exclude(**{category_field: ""})
+        .values_list(category_field, flat=True)
+        .distinct()
+        .order_by(category_field)
+    )
+
+    return render(
+        request,
+        "htmls/prayers.html",
+        {
+            "prayers": prayers,
+            "len_prayers": len(prayers),  # 🔥 sem COUNT()
+            "saints": saints,
+            "categories": categories,
+        }
+    )
 
 def santapedia(request):
     return render(request, 'htmls/santapedia.html')
 
+@cache_page(60 * 10)
 def article_detail(request, slug):
     article = get_object_or_404(Article, slug=slug)
-    articles = Article.objects.all()
-    return render(request, 'htmls/detail.html', {'article': article,
-                                                'articles': articles})
+    return render(request, 'htmls/detail.html', {'article': article,})
 
 def remove_accents(txt):
     if not txt:
@@ -184,88 +207,136 @@ def remove_accents(txt):
     )
 
 def search_suggestions(request):
-    q = request.GET.get('q', '')
-    results = []
+    print(request.LANGUAGE_CODE)
+    q = request.GET.get("q", "").strip()
 
-    if q:
-        q_norm = remove_accents(q).lower()
-        articles = []
+    if not q:
+        return JsonResponse({"results": []})
 
-        for a in Article.objects.all():
+    is_pt = request.LANGUAGE_CODE.startswith("pt-br")
 
-            if request.LANGUAGE_CODE == 'pt-br':
-                title = a.title_pt or ""
-                description = a.description_pt or ""
+    vector_field = "search_vector_pt" if is_pt else "search_vector_en"
+    title_field = "title_pt" if is_pt else "title_en"
+    description_field = "description_pt" if is_pt else "description_en"
+    config = "portuguese" if is_pt else "english"
 
-            else:
-                title = a.title_en or ""
-                description = a.description_en or ""
+    query = SearchQuery(q, config=config)
 
-            if q_norm in remove_accents(title).lower():
-                articles.append(a)
+    articles = (
+        Article.objects
+        .annotate(rank=SearchRank(F(vector_field), query)).order_by("-rank").values(title_field, description_field, "slug", "image")[:10]
+    )
 
-            if len(articles) >= 10:
-                break
+    results = [
+        {
+            "title": a[title_field] or "",
+            "description": a[description_field] or "",
+            "slug": a["slug"],
+            "image": a["image"] if a["image"] else "",
+        }
+        for a in articles
+    ]
 
-        results = [
-            {
-                'title': (a.title_pt or "") if request.LANGUAGE_CODE == 'pt-br' else (a.title_en or ""),
-                'slug': a.slug,
-                'description': (a.description_pt or "") if request.LANGUAGE_CODE == 'pt-br' else (a.description_en or ""),
-                'image': a.image.url if a.image else ''
-            }
-            for a in articles
-        ]
-
-    return JsonResponse({'results': results}) 
+    return JsonResponse({"results": results})
         
 
 def aleatory(request):
-    articles = Article.objects.all()
-    number = randint(1, len(articles))
-    article = Article.objects.filter(id=number)[0]
+    number = randint(1, Article.objects.count())
+    article = Article.objects.filter(id=number).defer('slug').first()
 
     return redirect(f'/articles/{article.slug}')
 
+@cache_page(60 * 10)
 def patronized_cities(request):
 
     country_id = request.GET.get("country")
-    state_id = request.GET.get("state")
-    city_name = request.GET.get("city")
+    state_abbreviation = request.GET.get("state")
+    city_id = request.GET.get("city")
 
-    countries = Country.objects.all().order_by("name")
+    state_id = State.objects.filter(abbreviation=state_abbreviation, country_id=country_id).values_list("id", flat=True).first() if state_abbreviation else None
+    # ======================
+    # Países (sempre 1 query)
+    # ======================
+    countries = Country.objects.only("id", "name_pt", "name_en").order_by("name_pt")
 
-    states = []
-    cities = []
-    saints = []
+    states = State.objects.none()
+    cities = City.objects.none()
+    saints = Article.objects.none()
 
+    # ======================
+    # Estados
+    # ======================
     if country_id:
-        states = State.objects.filter(country_id=country_id).order_by("name")
-        if not state_id and not city_name:
-            saints = Article.objects.filter(
-            patrons_of_country=country_id
-        ).distinct()
+        states = (
+            State.objects
+            .filter(country_id=country_id)
+            .only("id", "name", "abbreviation")
+            .order_by("name")
+        )
 
-    if state_id:
-        country = Country.objects.filter(id=country_id).first()
-        cities = City.objects.filter(state=state_id, country=country.name_pt).order_by("name")
-        if not city_name:
-            id = State.objects.filter(abbreviation=state_id).first()
-            saints = Article.objects.filter(
-            patrons_of_state=id
-        ).distinct()
+    # ======================
+    # Cidades
+    # ======================
+    if state_abbreviation:
+        cities = (
+            City.objects
+            .filter(state=state_abbreviation)
+            .only("id", "name")
+            .order_by("name")
+        )
 
-    if city_name and state_id:
-        saints = Article.objects.filter(
-            patron_of=city_name
-        ).distinct()
+    # ======================
+    # Santos (sempre por FK)
+    # ======================
+    if city_id:
+        saints = (
+            Article.objects
+            .filter(patron_of=city_id)
+            .only(
+                "id",
+                "title_pt", "title_en",
+                "description_pt", "description_en",
+                "slug", "image"
+            )
+            .distinct()
+        )
 
-    return render(request, "htmls/patronized_cities.html", {
-        "countries": countries,
-        "states": states,
-        "cities": cities,
-        "saints": saints,
-    })
+    elif state_id:
+        saints = (
+            Article.objects
+            .filter(patrons_of_state=state_id)
+            .only(
+                "id",
+                "title_pt", "title_en",
+                "description_pt", "description_en",
+                "slug", "image"
+            )
+            .distinct()
+        )
+
+    elif country_id:
+        saints = (
+            Article.objects
+            .filter(patrons_of_country__id=country_id)
+            .only(
+                "id",
+                "title_pt", "title_en",
+                "description_pt", "description_en",
+                "slug", "image"
+            )
+            .distinct()
+        )
+
+    return render(
+        request,
+        "htmls/patronized_cities.html",
+        {
+            "countries": countries,
+            "states": states,
+            "cities": cities,
+            "saints": saints,
+        },
+    )
 
 def get_states_by_country(request):
     country_id = request.GET.get("country")
@@ -291,59 +362,66 @@ def get_cities_by_state(request):
 def calendar_data(request):
     """Retorna eventos para o FullCalendar, forçando allDay e anulando o ano para o ano atual."""
     current_year = date.today().year
-    saints = Article.objects.exclude(feast_day__isnull=True)
+    lang = request.LANGUAGE_CODE
+
+    title_field = "title_en" if lang == "en" else "title_pt"
+
+    saints = (
+        Article.objects
+        .filter(feast_day__isnull=False)
+        .values("feast_day", title_field, "slug")
+    )
+
     events = []
 
-    for saint in saints:
-        # substitui o ano pelo ano atual (evita anos estranhos como 0001)
-        try:
-            feast_day = saint.feast_day.replace(year=current_year)
-        except Exception:
-            # fallback: se algo der errado, usa dia/mês atuais (não ideal, mas evita crash)
-            continue
+    for s in saints:
+        feast_day = s["feast_day"].replace(year=current_year)
 
-        # formata como ISO date (YYYY-MM-DD) e marca allDay true para evitar shifts de timezone
         events.append({
-            "title": saint.title_en if request.LANGUAGE_CODE == 'en' else saint.title_pt,
+            "title": s[title_field],
             "start": feast_day.strftime("%Y-%m-%d"),
             "allDay": True,
-            "url": f"/articles/{saint.slug}/"
+            "url": f"/articles/{s['slug']}/",
         })
 
     return JsonResponse(events, safe=False)
 
 def saints_by_month(request):
-    try:
-        month = int(request.GET.get("month") or date.today().month)
-    except ValueError:
-        month = date.today().month
+    lang = request.LANGUAGE_CODE
+    month = int(request.GET.get("month", date.today().month))
 
-    saints = Article.objects.filter(feast_day__isnull=False, feast_day__month=month).order_by('feast_day')
+    title_field = "title_en" if lang == "en" else "title_pt"
+
+    saints = (
+        Article.objects
+        .filter(
+            feast_day__isnull=False,
+            feast_day__month=month
+        )
+        .values(
+            "feast_day",
+            title_field,
+            "slug",
+            "image"
+        )
+        .order_by("feast_day")
+    )
 
     data = []
+
     for s in saints:
         data.append({
-            "title_pt": s.title_pt,
-            "title_en": s.title_en,
-            "slug": s.slug,
-            "day": s.feast_day.day,
-            "month": s.feast_day.month,
-            "image": s.image.url if getattr(s, "image", None) else None,
+            "title": s[title_field],
+            "slug": s["slug"],
+            "day": s["feast_day"].day,
+            "month": s["feast_day"].month,
+            "image": s["image"],  # já vem como path
         })
+
     return JsonResponse({"saints": data})
 
 def calendar(request):
-    today = date.today()
-    current_month = today.month
-
-    saints_this_month = Article.objects.filter(
-        feast_day__month=current_month
-    ).order_by('feast_day')
-
-    context = {
-        "saints_this_month": saints_this_month
-    }
-    return render(request, "htmls/calendar.html", context)
+    return render(request, "htmls/calendar.html")
 
 def contact(request):
     success = False

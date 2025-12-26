@@ -81,9 +81,9 @@
                                     
                                 </div>
                                     {% if request.LANGUAGE_CODE == 'en' %}
-                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_en }}">
+                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_en }}" loading="lazy">
                                     {% else %}
-                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_pt }}">
+                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_pt }}" loading="lazy">
                                     {% endif %}
                                 
                         </div>

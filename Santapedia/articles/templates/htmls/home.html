@@ -32,9 +32,9 @@
                         </div>
 
                         {% if request.LANGUAGE_CODE == 'en' %}
-                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_en }}">
+                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_en }}" loading="lazy">
                         {% else %}
-                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_pt }}">
+                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_pt }}" loading="lazy">
                         {% endif %}
                         
                 </div>
@@ -64,7 +64,7 @@
                 </div>
 
                 {% if prayer.saint and prayer.saint.image %}
-                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_en }}">
+                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_en }}" loading="lazy">
                 {% endif %}
             </article>
 
@@ -87,7 +87,7 @@
                 </div>
 
                 {% if prayer.saint and prayer.saint.image %}
-                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_pt }}">
+                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_pt }} " loading="lazy">
                 {% endif %}
             </article>
                 

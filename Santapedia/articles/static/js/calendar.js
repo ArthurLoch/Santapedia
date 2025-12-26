@@ -30,18 +30,18 @@ document.addEventListener('DOMContentLoaded', function() {
             saintItem.classList.add("d-flex", "align-items-center", "mb-3");
   
             const imageHtml = saint.image
-              ? `<img src="${saint.image}" alt="${currentLanguage == 'en' ? saint.title_en : saint.title_pt}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">`
+              ? `<img src="/media/${saint.image}" alt="${currentLanguage == 'en' ? saint.title : saint.title}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">`
               : `<div class="rounded bg-light d-flex align-items-center justify-content-center me-3" style="width:60px;height:60px;color:gray;"><i class="bi bi-person-fill"></i></div>`;
   
 
             if (window.currentLanguage === 'en') {
               
-              console.log(`${saint.title_en}`)
+              console.log(`${saint.title}`)
               saintItem.innerHTML = `
               ${imageHtml}
               <div>
                 <p class="fw-semibold text-decoration-none">
-                  ${saint.title_en}
+                  ${saint.title}
                 </p>
                 <div class="text-muted small">${new Date(2000, saint.month - 1).toLocaleString('en', { month: 'long' })} ${saint.day}</div>
               </div>
@@ -49,12 +49,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
               
-              console.log(`${saint.title_pt}`)
+              console.log(`${saint.title}`)
               saintItem.innerHTML = `
               ${imageHtml}
               <div>
                 <p class="fw-semibold text-decoration-none">
-                  ${saint.title_pt}
+                  ${saint.title}
                 </p>
                 <div class="text-muted small">${saint.day} de ${new Date(2000, saint.month - 1).toLocaleString('pt-BR', { month: 'long' })}</div>
               </div>

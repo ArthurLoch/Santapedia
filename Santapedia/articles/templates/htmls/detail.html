@@ -51,7 +51,7 @@
                 </th></tr>
                 <tr>
                     {% if article.image %}
-                        <th colspan="2" id="img"><img src="{{ article.image.url }}" alt="Imagem de {{ article.title }}"></th>
+                        <th colspan="2" id="img"><img src="{{ article.image.url }}" alt="Imagem de {{ article.title }}" loading="lazy"></th>
                     {% else %}
                         <th>
                             <p>{% trans 'Sem imagem disponível' %}.</p>
