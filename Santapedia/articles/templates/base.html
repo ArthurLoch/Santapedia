@@ -150,13 +150,13 @@
 
   <div id="cookie-banner" class="cookie-banner">
     <p>
-      Usamos cookies para melhorar sua experiência e analisar o tráfego do site.
-      <a href="{% url 'privacy_policy' %}">Política de Privacidade</a>.
+      {% trans "Usamos cookies para melhorar sua experiência e analisar o tráfego do site." %}
+      <a href="{% url 'privacy_policy' %}">{% trans "Política de Privacidade" %}</a>.
     </p>
 
     <div class="cookie-actions">
-      <button id="accept-cookies">Aceitar</button>
-      <button id="reject-cookies" class="secondary">Rejeitar</button>
+      <button id="accept-cookies">{% trans "Aceitar" %}</button>
+      <button id="reject-cookies" class="secondary">{% trans "Rejeitar" %}</button>
     </div>
   </div>
 

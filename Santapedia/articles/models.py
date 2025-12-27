@@ -2,7 +2,7 @@ from django.db import models
 from django.db.models import CharField, SlugField, DateField, DateTimeField, ImageField, TextField, ManyToManyField, ForeignKey
 from django.utils.text import slugify
 from django.contrib.postgres.indexes import GinIndex
-from django.contrib.postgres.search import SearchVectorField
+from django.contrib.postgres.search import SearchVectorField, SearchVector
 
 # Create your models here.
 class Article(models.Model):
@@ -72,6 +72,19 @@ class Article(models.Model):
         if not self.slug:
             self.slug = slugify(self.title)
         super().save(*args, **kwargs)
+
+        Article.objects.filter(pk=self.pk).update(
+            search_vector_pt=(
+                SearchVector("title_pt", weight="A") +
+                SearchVector("content_pt", weight="B") +
+                SearchVector("quotes_pt", weight="C")
+            ),
+            search_vector_en=(
+                SearchVector("title_en", weight="A") +
+                SearchVector("content_en", weight="B") +
+                SearchVector("quotes_en", weight="C")
+            )
+        )
     
 
     def __str__(self):
@@ -101,9 +114,24 @@ class Prayer(models.Model):
             GinIndex(fields=["search_vector_en"]),
         ]
 
-
     def __str__(self):
         return self.title
+    
+    def save(self, *args, **kwargs):
+        # 1️⃣ salva normalmente
+        super().save(*args, **kwargs)
+
+        # 2️⃣ atualiza o search_vector no banco
+        Prayer.objects.filter(pk=self.pk).update(
+            search_vector_pt=(
+                SearchVector("title_pt", weight="A") +
+                SearchVector("content_pt", weight="B")
+            ),
+            search_vector_en=(
+                SearchVector("title_en", weight="A") +
+                SearchVector("content_en", weight="B")
+            )
+        )
 
 
 class City(models.Model):

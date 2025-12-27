@@ -81,6 +81,22 @@ msgstr "Search..."
 msgid "Pesquisar"
 msgstr "Search"
 
+#: .\articles\templates\base.html:70
+msgid "Usamos cookies para melhorar sua experiência e analisar o tráfego do site."
+msgstr "We use cookies to improve your experience and analyze website traffic."
+
+#: .\articles\templates\base.html:72
+msgid "Política de Privacidade"
+msgstr "Privacy Policy"
+
+#: .\articles\templates\base.html:74
+msgid "Aceitar"
+msgstr "Accept"
+
+#: .\articles\templates\base.html:76
+msgid "Rejeitar"
+msgstr "Reject"
+
 #: .\articles\templates\base.html:82
 msgid "2025 Santapédia - A Enciclopédia Católica"
 msgstr "2025 Santapedia - The Catholic Encyclopedia"
