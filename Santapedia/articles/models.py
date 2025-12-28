@@ -3,12 +3,13 @@ from django.db.models import CharField, SlugField, DateField, DateTimeField, Ima
 from django.utils.text import slugify
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchVectorField, SearchVector
+from cloudinary.models import CloudinaryField
 
 # Create your models here.
 class Article(models.Model):
     title = CharField(max_length=100, db_index=True)
     slug = SlugField(unique=True, blank=True, db_index=True)
-    image = ImageField(upload_to='saints/', blank=True, null=True, db_index=True)
+    image = CloudinaryField('image', blank=True, null=True, db_index=True)
 
     born_date = DateField(blank=True, null=True, db_index=True)
     death_date = DateField(blank=True, null=True, db_index=True)

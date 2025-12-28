@@ -31,10 +31,12 @@
                         {% endif %}    
                         </div>
 
-                        {% if request.LANGUAGE_CODE == 'en' %}
-                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_en }}" loading="lazy">
-                        {% else %}
-                            <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_pt }}" loading="lazy">
+                        {% if saint.image %}
+                            {% if request.LANGUAGE_CODE == 'en' %}
+                                <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_en }}" loading="lazy">
+                            {% else %}
+                                <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_pt }}" loading="lazy">
+                            {% endif %}
                         {% endif %}
                         
                 </div>
