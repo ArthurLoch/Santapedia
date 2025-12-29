@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
             saintItem.classList.add("d-flex", "align-items-center", "mb-3");
   
             const imageHtml = saint.image
-              ? `<img src="/media/${saint.image}" alt="${currentLanguage == 'en' ? saint.title : saint.title}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">`
+              ? `<img src="${saint.image}" alt="${saint.title}" class="rounded me-3" style="width:60px;height:60px;object-fit:cover;">`
               : `<div class="rounded bg-light d-flex align-items-center justify-content-center me-3" style="width:60px;height:60px;color:gray;"><i class="bi bi-person-fill"></i></div>`;
   
 

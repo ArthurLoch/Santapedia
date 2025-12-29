@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         // Image
                         if (item.image) {
                             const img = document.createElement('img');
-                            img.src = '/media/' + item.image;
+                            img.src = item.image;
                             img.alt = item.title;
                             img.style.width = '40px';
                             img.style.height = '40px';

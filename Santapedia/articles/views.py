@@ -207,32 +207,28 @@ def remove_accents(txt):
     )
 
 def search_suggestions(request):
-    print(request.LANGUAGE_CODE)
     q = request.GET.get("q", "").strip()
 
     if not q:
         return JsonResponse({"results": []})
 
-    is_pt = request.LANGUAGE_CODE.startswith("pt-br")
+    is_pt = request.LANGUAGE_CODE.startswith("pt")
 
-    vector_field = "search_vector_pt" if is_pt else "search_vector_en"
     title_field = "title_pt" if is_pt else "title_en"
     description_field = "description_pt" if is_pt else "description_en"
-    config = "portuguese" if is_pt else "english"
-
-    query = SearchQuery(q, config=config)
 
     articles = (
         Article.objects
-        .annotate(rank=SearchRank(F(vector_field), query)).order_by("-rank").values(title_field, description_field, "slug", "image")[:10]
+        .filter(**{f"{title_field}__icontains": q})
+        .only(title_field, description_field, "slug", "image")[:10]
     )
 
     results = [
         {
-            "title": a[title_field] or "",
-            "description": a[description_field] or "",
-            "slug": a["slug"],
-            "image": a["image"] if a["image"] else "",
+            "title": getattr(a, title_field) or "",
+            "description": getattr(a, description_field) or "",
+            "slug": a.slug,
+            "image": a.image.url if a.image else "",
         }
         for a in articles
     ]
@@ -389,33 +385,25 @@ def calendar_data(request):
 def saints_by_month(request):
     lang = request.LANGUAGE_CODE
     month = int(request.GET.get("month", date.today().month))
-
     title_field = "title_en" if lang == "en" else "title_pt"
 
     saints = (
         Article.objects
-        .filter(
-            feast_day__isnull=False,
-            feast_day__month=month
-        )
-        .values(
-            "feast_day",
-            title_field,
-            "slug",
-            "image"
-        )
-        .order_by("feast_day")
+        .filter(feast_day__isnull=False, feast_day__month=month)
+        .only("feast_day", title_field, "slug", "image")
     )
 
     data = []
-
     for s in saints:
+        if not s.feast_day:
+            continue
+
         data.append({
-            "title": s[title_field],
-            "slug": s["slug"],
-            "day": s["feast_day"].day,
-            "month": s["feast_day"].month,
-            "image": s["image"],  # já vem como path
+            "title": getattr(s, title_field),
+            "slug": s.slug,
+            "day": s.feast_day.day,
+            "month": s.feast_day.month,
+            "image": s.image.url if s.image else "",
         })
 
     return JsonResponse({"saints": data})
