@@ -64,7 +64,7 @@
     {% if saints %}
         {% for saint in saints %}
             <!-- Patron -->
-            <a href="http://127.0.0.1:8000/articles/{{saint.slug}}/" class="article">
+            <a href="/articles/{{saint.slug}}/" class="article">
                 <div class="media">
                         <div class="media-body">
                             {% if request.LANGUAGE_CODE == 'en' %}

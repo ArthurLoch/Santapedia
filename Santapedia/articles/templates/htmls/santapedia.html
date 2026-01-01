@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                     <th>{% trans 'Data de Lançamento' %}</th>
-                    <th>{% trans '01 de Janeiro' %}</th> 
+                    <th>{% trans '1 de Janeiro de 2026' %}</th> 
                 </tr>
                 <tr>
                     <th>{% trans 'Criador' %}</th>
@@ -42,7 +42,11 @@
                 
                 <tr>
                     <th>{% trans 'Redes Sociais' %}</th>
-                    <th><a href="#" target="_blank">Instagram <i class="bi bi-instagram"></i></a></th>
+                    {% if request.LANGUAGE_CODE == 'en' %}
+                        <th><a href="https://www.instagram.com/santapedia_en/" target="_blank" rel="noopener">Instagram <i class="bi bi-instagram"></i></a></th>
+                    {% else %}
+                        <th><a href="https://www.instagram.com/santapedia_pt/" target="_blank" rel="noopener">Instagram <i class="bi bi-instagram"></i></a></th>
+                    {% endif %}
                 </tr>
                 <tr>
                     <th>{% trans 'Endereço Eletrônico' %}</th>
@@ -136,7 +140,12 @@
                     <a href="{% url 'contact' %}">santapedia.contato@gmail.com</a>
                 </p>
                 <p>
-                    {% trans 'Também estamos no Instagram' %}: <a href="#">@santapedia</a>
+                    {% trans 'Também estamos no Instagram' %}: 
+                    {% if request.LANGUAGE_CODE == 'en' %}
+                        <a href="https://www.instagram.com/santapedia_br/" target="_blank" rel="noopener">@santapedia_br</a>
+                    {% else %}
+                        <a href="https://www.instagram.com/santapedia_en/" target="_blank" rel="noopener">@santapedia_en</a>
+                    {% endif %}
                 </p>
             </section>
         </div>

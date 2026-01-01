@@ -269,8 +269,8 @@ msgid "Data de Lançamento"
 msgstr "Release Date"
 
 #: .\articles\templates\htmls\santapedia.html:30
-msgid "01 de Janeiro"
-msgstr "January 1st"
+msgid "1 de Janeiro de 2026"
+msgstr "January 1, 2026"
 
 #: .\articles\templates\htmls\santapedia.html:33
 msgid "Criador"
