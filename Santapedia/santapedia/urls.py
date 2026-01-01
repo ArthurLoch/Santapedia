@@ -24,7 +24,7 @@ from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = [
     path('i18n/', include('django.conf.urls.i18n')), 
-    path('', lambda request: redirect('home')),
+    path('', views.redirect_to_home),
 ]
 
 if settings.DEBUG:

@@ -11,6 +11,7 @@ from datetime import date
 from django.contrib.postgres.search import SearchQuery, SearchRank
 from django.db.models import F
 from django.views.decorators.cache import cache_page
+from django.urls import reverse
 
 @cache_page(60 * 10)
 def home(request):
@@ -20,6 +21,10 @@ def home(request):
     prayers = (Prayer.objects.select_related('saint').only('id','title_pt', 'title_en', 'content_pt', 'content_en', 'saint__id', 'saint__title_pt', 'saint__title_en', 'saint__image').order_by('title_pt')[:5])
 
     return render(request, 'htmls/home.html', {'saints': articles, 'len_saints': Article.objects.count(), 'len_prayers': Prayer.objects.count(), 'prayers': prayers})
+
+def redirect_to_home(request):
+    # if the URL is empty, redirect to home
+    return redirect(reverse('home'))
 
 @cache_page(60 * 10)
 def saints(request):
