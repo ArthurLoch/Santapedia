@@ -8,6 +8,10 @@ document.addEventListener('DOMContentLoaded', function(){
     const menu = document.getElementById('menu');
     const list = document.getElementById('suggestions');
 
+    magnifying_glass.addEventListener('click', function() {
+        toggleSearch();
+    });
+
     // ======== THEME BUTTONS (mobile + desktop) ========
     const themeButtons = document.querySelectorAll(".theme-toggle-desktop, .theme-toggle-mobile");
     const body = document.body;
