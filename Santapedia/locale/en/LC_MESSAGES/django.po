@@ -338,7 +338,7 @@ msgstr ""
 
 #: .\articles\templates\htmls\santapedia.html:71
 msgid ""
-"Outra inspiração foi a de <a href=\"http://127.0.0.1:8000/articles/sao-carlo-"
+"Outra inspiração foi a de <a href=\"/articles/sao-carlo-"
 "acutis/\">São Carlo Acutis</a>, o Padroeiro da Internet, santo católico que "
 "criou o site <a href=\"https://www.miracolieucaristici.org/\" "
 "target=\"_blank\">www.miracolieucaristici.org</a>, site focado em mostrar "
@@ -346,7 +346,7 @@ msgid ""
 "a Santapédia tenta ter esse sucesso evangelizador mostrando milagres, para "
 "que fortaleça a fé do cristão que está lendo."
 msgstr ""
-"Another inspiration was <a href=\"http://127.0.0.1:8000/articles/sao-carlo-"
+"Another inspiration was <a href=\"/articles/sao-carlo-"
 "acutis/\">Saint Carlo Acutis</a>, the Patron Saint of the Internet, a "
 "Catholic saint who created the website <a href=\"https://www."
 "miracolieucaristici.org/\" target=\"_blank\">www.miracolieucaristici.org</a>,"
@@ -360,9 +360,9 @@ msgstr "Saint Benedict Medal"
 
 #: .\articles\templates\htmls\santapedia.html:75
 msgid ""
-"Medalha de <a href=\"http://127.0.0.1:8000/articles/sao-bento/\">São Bento"
+"Medalha de <a href=\"/articles/sao-bento/\">São Bento"
 msgstr ""
-"Medal of <a href=\"http://127.0.0.1:8000/articles/sao-bento/\">Saint Benedict"
+"Medal of <a href=\"/articles/sao-bento/\">Saint Benedict"
 
 #: .\articles\templates\htmls\santapedia.html:78
 msgid ""
@@ -379,10 +379,10 @@ msgstr ""
 
 #: .\articles\templates\htmls\santapedia.html:85
 msgid ""
-"Cores do manto de <a href=\"http://127.0.0.1:8000/articles/nossa-senhora-"
+"Cores do manto de <a href=\"/articles/nossa-senhora-"
 "aparecida/\">Nossa Senhora Aparecida."
 msgstr ""
-"Colors of the mantle of <a href=\"http://127.0.0.1:8000/articles/nossa-"
+"Colors of the mantle of <a href=\"/articles/nossa-"
 "senhora-aparecida/\">Our Lady of Aparecida."
 
 #: .\articles\templates\htmls\santapedia.html:88
