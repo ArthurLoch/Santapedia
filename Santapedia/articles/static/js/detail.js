@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // === Parte 1: Dia Festivo ===
+    // === Feast Day ===
     if (window.feastDay) {
         const monthNum = parseInt(window.feastDay.month);
         const dayNum = window.feastDay.day;
@@ -23,16 +23,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // === Parte 2: Criar índice automaticamente com base nos <h2> e <h3> ===
+    // === Automatically generate a table of contents based on <h2> and <h3> tags ===
     const tocList = document.getElementById('toc-list');
     const articleContent = document.querySelector('.content');
 
     if (tocList && articleContent) {
-        tocList.innerHTML = ''; // limpa o índice padrão
+        tocList.innerHTML = ''; // Clear the default index
         const headings = articleContent.querySelectorAll('h2, h3');
 
         headings.forEach((heading, index) => {
-            // Cria um id único para cada título se não tiver
+            // Create a unique ID for each heading if it doesn't have one
             if (!heading.id) {
                 heading.id = 'section-' + index;
             }
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             a.href = '#' + heading.id;
             a.textContent = heading.textContent;
 
-            // Se for h3, dá uma indentada pra mostrar hierarquia
+            // Indent <h3> tags to show hierarchy
             if (heading.tagName.toLowerCase() === 'h3') {
                 li.style.marginLeft = '1rem';
                 li.style.fontSize = '0.95em';
@@ -52,13 +52,13 @@ document.addEventListener('DOMContentLoaded', function() {
             tocList.appendChild(li);
         });
 
-        // Se não houver títulos, remove o bloco "Neste artigo"
+        // If no headings are found, remove the 'In this article' block
         if (headings.length === 0) {
             document.querySelector('.article-index').remove();
         }
     }
 
-    // === Parte 3: Rolagem suave ===
+    // Smooth scroll ===
     document.querySelectorAll('.article-index a').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();

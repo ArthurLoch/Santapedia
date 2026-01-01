@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             if (window.currentLanguage === 'en') {
               
-              console.log(`${saint.title}`)
               saintItem.innerHTML = `
               ${imageHtml}
               <div>
@@ -49,7 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
             } else {
               
-              console.log(`${saint.title}`)
               saintItem.innerHTML = `
               ${imageHtml}
               <div>
@@ -82,13 +80,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
       locale: currentLanguage == 'en' ? 'en' : 'pt-br',
-      timeZone: 'local',    // importante
+      timeZone: 'local',
       height: 'auto',
       headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
       buttonText: currentLanguage == 'en' ? { today: 'Today' } : { today: 'Hoje' },
       events: "/ajax/calendar-data/",
       eventClick: function(info) { /* ... */ },
-      eventDidMount: function(info) { /* estilo */ },
+      eventDidMount: function(info) { /* style */ },
       datesSet: function(info) {
         const currentMonth = info.view.currentStart.getMonth() + 1;
         const currentYear  = info.view.currentStart.getFullYear();

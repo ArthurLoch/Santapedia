@@ -14,6 +14,7 @@ from django.views.decorators.cache import cache_page
 
 @cache_page(60 * 10)
 def home(request):
+    # Filter 5 articles and 5 prayers to be featured on the homepage
     articles = (Article.objects.only('id','title_pt', 'title_en', 'description_pt', 'description_en', 'content_pt', 'content_en', 'slug', 'image').order_by('title_pt')[:5])
 
     prayers = (Prayer.objects.select_related('saint').only('id','title_pt', 'title_en', 'content_pt', 'content_en', 'saint__id', 'saint__title_pt', 'saint__title_en', 'saint__image').order_by('title_pt')[:5])
@@ -22,6 +23,7 @@ def home(request):
 
 @cache_page(60 * 10)
 def saints(request):
+    # Field definition according to language
     lang = request.LANGUAGE_CODE
     title_field = "title_en" if lang == "en" else "title_pt"
     country_field = "country_en" if lang == "en" else "country_pt"
@@ -30,14 +32,13 @@ def saints(request):
 
     articles = Article.objects.all()
 
-    # ======================
-    # Filtros
-    # ======================
+    # Filters
     order = request.GET.get("order", "")
     category = request.GET.get("category", "")
     country = request.GET.get("country", "")
     title = request.GET.get("q") or request.GET.get("title", "")
 
+    # Filter articles according to the selected filter
     if category:
         articles = articles.filter(**{category_field: category})
 
@@ -45,6 +46,7 @@ def saints(request):
         articles = articles.filter(**{country_field: country})
 
     if title:
+        # Filter by full-text search
         query = SearchQuery(title)
         articles = (
             articles
@@ -53,9 +55,8 @@ def saints(request):
             .order_by("-rank")
         )
 
-    # ======================
-    # Ordenação (NO BANCO)
-    # ======================
+
+    # Sort according to the selected option
     if order == "latest":
         articles = articles.order_by("-created_at")
     elif order == "oldest":
@@ -63,10 +64,8 @@ def saints(request):
     else:
         articles = articles.order_by(Lower(title_field))
 
-    # ======================
-    # Filtros do formulário
-    # (SEM iterar objetos)
-    # ======================
+   
+   # Display available Countries and Categories in the filter
     countries = (
         Article.objects
         .exclude(**{country_field: ""})
@@ -85,7 +84,7 @@ def saints(request):
 
     return render(
         request,
-        "htmls/search.html",
+        "htmls/saints.html",
         {
             "articles": articles,
             "len_articles": articles.count(),
@@ -97,8 +96,8 @@ def saints(request):
 
 @cache_page(60 * 10)
 def prayers(request):
+    # Field definition according to language
     lang = request.LANGUAGE_CODE
-
     title_field = "title_en" if lang == "en" else "title_pt"
     saint_field = "saint__title_en" if lang == "en" else "saint__title_pt"
     category_field = "category_en" if lang == "en" else "category_pt"
@@ -113,24 +112,21 @@ def prayers(request):
             "content_pt", "content_en",
             "created_at",
             "category_pt", "category_en",
-            "saint_id",                 # 🔥 ESSENCIAL
+            "saint_id",
             "saint__title_pt",
             "saint__title_en",
             "saint__image",
         )
     )
 
-    # ======================
-    # GET params
-    # ======================
+    # Filters
     order = request.GET.get("order", "")
     category = request.GET.get("category", "")
     saint = request.GET.get("saint", "")
     title = request.GET.get("q") or request.GET.get("title", "")
 
-    # ======================
-    # Filtros
-    # ======================
+
+    # Filter articles according to the selected filter
     if category:
         prayers = prayers.filter(**{category_field: category})
 
@@ -138,6 +134,7 @@ def prayers(request):
         prayers = prayers.filter(**{saint_field: saint})
 
     if title:
+        # Filter by full-text search
         query = SearchQuery(title)
         prayers = (
             prayers
@@ -146,9 +143,7 @@ def prayers(request):
             .order_by("-rank")
         )
 
-    # ======================
-    # Ordenação
-    # ======================
+    # Sort according to the selected option
     if order == "latest":
         prayers = prayers.order_by("-created_at")
     elif order == "oldest":
@@ -156,12 +151,10 @@ def prayers(request):
     else:
         prayers = prayers.order_by(Lower(title_field))
 
-    # 🔥 Avalia UMA vez (evita múltiplos hits)
+    
     prayers = list(prayers)
 
-    # ======================
-    # Filtros do formulário
-    # ======================
+    # Display available Saints and Categories in the filter
     saints = (
         Prayer.objects
         .exclude(saint__isnull=True)
@@ -183,30 +176,27 @@ def prayers(request):
         "htmls/prayers.html",
         {
             "prayers": prayers,
-            "len_prayers": len(prayers),  # 🔥 sem COUNT()
+            "len_prayers": len(prayers),
             "saints": saints,
             "categories": categories,
         }
     )
 
 def santapedia(request):
+    # Return the 'About Santapedia' page
     return render(request, 'htmls/santapedia.html')
 
 @cache_page(60 * 10)
 def article_detail(request, slug):
+    # Return the page of a specific article
     article = get_object_or_404(Article, slug=slug)
     return render(request, 'htmls/detail.html', {'article': article,})
 
-def remove_accents(txt):
-    if not txt:
-        return ""
-    
-    return ''.join(
-        c for c in unicodedata.normalize('NFD', txt)
-        if unicodedata.category(c) != 'Mn'
-    )
 
 def search_suggestions(request):
+    # Suggestion list for the search bar
+
+    # q is what the user is typing
     q = request.GET.get("q", "").strip()
 
     if not q:
@@ -214,9 +204,11 @@ def search_suggestions(request):
 
     is_pt = request.LANGUAGE_CODE.startswith("pt")
 
+    # Field definition according to language
     title_field = "title_pt" if is_pt else "title_en"
     description_field = "description_pt" if is_pt else "description_en"
 
+    # Filter articles containing the entered text in the title
     articles = (
         Article.objects
         .filter(**{f"{title_field}__icontains": q})
@@ -237,31 +229,31 @@ def search_suggestions(request):
         
 
 def aleatory(request):
+    # Redirect to a random article
     number = randint(1, Article.objects.count())
     article = Article.objects.filter(id=number).defer('slug').first()
 
-    return redirect(f'/articles/{article.slug}')
+    return redirect(f'/articles/{article.slug}/')
 
 @cache_page(60 * 10)
 def patronized_cities(request):
-
+    # Get filter parameters
     country_id = request.GET.get("country")
     state_abbreviation = request.GET.get("state")
     city_id = request.GET.get("city")
 
+    # Determine state_id from state_abbreviation and country_id
     state_id = State.objects.filter(abbreviation=state_abbreviation, country_id=country_id).values_list("id", flat=True).first() if state_abbreviation else None
-    # ======================
-    # Países (sempre 1 query)
-    # ======================
+    
+    # Display available Countries in the filter
     countries = Country.objects.only("id", "name_pt", "name_en").order_by("name_pt")
 
+    # Initialize empty querysets
     states = State.objects.none()
     cities = City.objects.none()
     saints = Article.objects.none()
 
-    # ======================
-    # Estados
-    # ======================
+    # Display States based on selected Country
     if country_id:
         states = (
             State.objects
@@ -270,9 +262,7 @@ def patronized_cities(request):
             .order_by("name")
         )
 
-    # ======================
-    # Cidades
-    # ======================
+    # Display Cities based on selected State
     if state_abbreviation:
         cities = (
             City.objects
@@ -281,9 +271,7 @@ def patronized_cities(request):
             .order_by("name")
         )
 
-    # ======================
-    # Santos (sempre por FK)
-    # ======================
+    # Display Saints based on selected City, State, or Country
     if city_id:
         saints = (
             Article.objects
@@ -335,6 +323,7 @@ def patronized_cities(request):
     )
 
 def get_states_by_country(request):
+    # Get states for a given country (AJAX)
     country_id = request.GET.get("country")
     if not country_id:
         return JsonResponse({"states": []})
@@ -345,6 +334,7 @@ def get_states_by_country(request):
 
 
 def get_cities_by_state(request):
+    # Get cities for a given state and country (AJAX)
     state_id = request.GET.get("state")
     country_id = request.GET.get("country")
     if not state_id:
@@ -356,12 +346,14 @@ def get_cities_by_state(request):
     return JsonResponse({"cities": list(cities)})
 
 def calendar_data(request):
-    """Retorna eventos para o FullCalendar, forçando allDay e anulando o ano para o ano atual."""
+    # Return JSON data for the calendar of saints' feast days
     current_year = date.today().year
     lang = request.LANGUAGE_CODE
 
+    # Field definition according to language
     title_field = "title_en" if lang == "en" else "title_pt"
 
+    # Get all saints with a feast day
     saints = (
         Article.objects
         .filter(feast_day__isnull=False)
@@ -371,6 +363,7 @@ def calendar_data(request):
     events = []
 
     for s in saints:
+        # Adjust feast day to the current year
         feast_day = s["feast_day"].replace(year=current_year)
 
         events.append({
@@ -383,10 +376,12 @@ def calendar_data(request):
     return JsonResponse(events, safe=False)
 
 def saints_by_month(request):
+    # Return JSON data of saints for a given month
     lang = request.LANGUAGE_CODE
     month = int(request.GET.get("month", date.today().month))
     title_field = "title_en" if lang == "en" else "title_pt"
 
+    # Get saints with feast days in the specified month
     saints = (
         Article.objects
         .filter(feast_day__isnull=False, feast_day__month=month)
@@ -409,11 +404,15 @@ def saints_by_month(request):
     return JsonResponse({"saints": data})
 
 def calendar(request):
+    # Return the calendar page
     return render(request, "htmls/calendar.html")
 
 def contact(request):
+    # Contact page
+
     success = False
     if request.method == 'POST':
+        # Create form with Django Forms
         form = ContactForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -421,19 +420,33 @@ def contact(request):
             subject = form.cleaned_data['subject']
             message = form.cleaned_data['message']
 
-            full_message = f"""
-            Nova mensagem de contato da Santapédia:
+            if request.LANGUAGE_CODE == 'en':
+                full_message = f"""
+                New contact message from Santapédia:
 
-            Nome: {name}
-            E-mail: {email}
-            Assunto: {subject}
+                Name: {name}
+                E-mail: {email}
+                Subject: {subject}
 
-            Mensagem:
-            {message}
-            """
+                Message:
+                {message}
+                """
+                
+            else:
+                full_message = f"""
+                Nova mensagem de contato da Santapédia:
 
+                Nome: {name}
+                E-mail: {email}
+                Assunto: {subject}
+
+                Mensagem:
+                {message}
+                """
+
+            # Send an email to santapedia.contato@gmail.com
             email_message = EmailMessage(
-                subject = f'[Santapédia] {subject}',
+                subject = f'[Santapedia] {subject}' if request.LANGUAGE_CODE == 'en' else f'[Santapédia] {subject}',
                 body = full_message,
                 from_email = settings.DEFAULT_FROM_EMAIL,
                 to=[settings.DEFAULT_FROM_EMAIL],
@@ -447,4 +460,5 @@ def contact(request):
     return render(request, 'htmls/contact.html', {'form': form, 'success': success})
 
 def privacy_policy(request):
+    # Return the Privacy Policy page
     return render(request, 'htmls/privacy_policy.html')

@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', function(){
         menu.style.display = 'none';
         magnifying_glass.style.display = 'none';
 
-        // Esconde apenas o botão correto (desktop)
+        // Blur the right button (desktop)
         document.querySelector(".theme-toggle-desktop")?.style.setProperty("display", "none", "important");
         document.querySelector(".language-switch-desktop")?.style.setProperty("display", "none", "important");
     });
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function(){
             search_button.style.display = 'none';
             
             if (window.innerWidth > 768) {
-            // Mostra apenas o botão correto no desktop
+            // Display the right button (desktop)
             document.querySelector(".theme-toggle-desktop")?.classList.remove("d-none");
             document.querySelector(".theme-toggle-desktop")?.style.setProperty("display", "inline-block");
 

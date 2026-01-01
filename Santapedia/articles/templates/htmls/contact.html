@@ -24,13 +24,38 @@
 
         <form action="" method="post" id="contact">
             {% csrf_token %}
-            {% for i in form %}
-                <!-- Inputs -->
-                <p>
-                    {{ i.label }}
-                    {{ i }}
-                </p>
-            {% endfor %}
+            <p>
+                {% if request.LANGUAGE_CODE == "en" %}
+                    Name
+                {% else %}
+                    Nome
+                {% endif %}
+                {{ form.name }}
+            </p>
+            <p>
+                {% if request.LANGUAGE_CODE == "en" %}
+                    Email
+                {% else %}
+                    Email
+                {% endif %}
+                {{ form.email }}
+            </p>
+            <p>
+                {% if request.LANGUAGE_CODE == "en" %}
+                    Subject
+                {% else %}
+                    Assunto
+                {% endif %}
+                {{ form.subject }}
+            </p>
+            <p>
+                {% if request.LANGUAGE_CODE == "en" %}
+                    Message
+                {% else %}
+                    Mensagem
+                {% endif %}
+                {{ form.message }}
+            </p>
             <button type="submit" id="submit">{% trans 'Enviar' %}</button>
         </form>
     </div>

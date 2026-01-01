@@ -98,8 +98,8 @@ msgid "Rejeitar"
 msgstr "Reject"
 
 #: .\articles\templates\base.html:82
-msgid "2025 Santapédia - A Enciclopédia Católica"
-msgstr "2025 Santapedia - The Catholic Encyclopedia"
+msgid "2026 Santapédia - A Enciclopédia Católica"
+msgstr "2026 Santapedia - The Catholic Encyclopedia"
 
 #: .\articles\templates\htmls\calendar.html:12
 msgid "Calendário Litúrgico dos Santos"
