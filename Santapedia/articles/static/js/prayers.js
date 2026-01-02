@@ -1,5 +1,23 @@
 document.addEventListener("DOMContentLoaded", function () {
+
     if (typeof prayersData === "undefined") return;
+
+    function getMaxChars() {
+        const width = window.innerWidth;
+        if (width <= 991) return 100;
+        if (width >= 1200) return 350;
+        return 175;
+    }
+
+    function truncateText(text, limit) {
+        if (text.length <= limit) return text;
+        let truncated = text.substring(0, limit);
+        const lastSpace = truncated.lastIndexOf(" ");
+        if (lastSpace > 0) truncated = truncated.substring(0, lastSpace);
+        return truncated + "...";
+    }
+
+    const maxChars = getMaxChars();
 
     document.querySelectorAll(".collapse-btn").forEach(btn => {
         const id = btn.getAttribute("data-id");
@@ -22,13 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         btn.addEventListener("click", () => {
             expanded = !expanded;
-            if (expanded) {
-                textDiv.innerHTML = prayersData[id].full;
-                btn.innerHTML = 'Fechar oração <i class="bi bi-chevron-up"></i>';
-            } else {
-                textDiv.innerHTML = shortText;
-                btn.innerHTML = 'Ler oração completa <i class="bi bi-chevron-down"></i>';
-            }
+            textDiv.innerHTML = expanded ? prayersData[id].full : shortText;
+            btn.innerHTML = expanded
+                ? 'Fechar oração <i class="bi bi-chevron-up"></i>'
+                : 'Ler oração completa <i class="bi bi-chevron-down"></i>';
         });
     });
 });
