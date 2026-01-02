@@ -147,6 +147,7 @@ input#search_bar{
 .suggestions-list a:hover {
   background-color: var(--color-6);
 }
+
 footer{
   background-color: var(--color-1);
   text-align: center;
@@ -259,5 +260,14 @@ button#menu-button:hover, button#magnifying_glass:hover, button.theme-toggle-mob
   .cookie-actions button {
     width: 90vw;
     margin: auto;
+  }
+}
+
+@media (max-width: 600px) {
+  input#search_bar{
+    width: 60vw;
+  }
+  .suggestions-list{
+    width: 60vw;          
   }
 }

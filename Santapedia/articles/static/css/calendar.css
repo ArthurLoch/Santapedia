@@ -100,3 +100,8 @@ div#saints-list p{
 img.rounded{
     margin-right: 10px;
 }
+@media (max-width: 775px) {
+    h2{
+        font-size: 1.2em
+    }
+}

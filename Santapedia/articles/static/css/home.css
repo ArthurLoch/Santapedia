@@ -25,14 +25,7 @@ body.dark-mode {
 main.container{
     margin-top: 20px;
 }
-@media (max-width: 775px) {
-    h1{
-        font-size: 1.6em;
-    }
-    h2{
-        font-size: 1.3em
-    }
-}
+
 h1.welcome{
     text-align: center;
 }
@@ -158,5 +151,25 @@ button.clear-btn > a{
     div#menu-filter input, div#menu-cities input{
         margin: 5px 0px;
         width: 95%;
+    }
+}
+@media (max-width: 775px) {
+    h1{
+        font-size: 1.6em;
+    }
+    h2{
+        font-size: 1.3em
+    }
+    h3{
+        font-size: 1em;
+    }
+    h5{
+        font-size: 1.15em;
+    }
+    p{
+        font-size: 0.7em;
+    }
+    button#filter{
+        margin: auto auto 15px auto;
     }
 }
