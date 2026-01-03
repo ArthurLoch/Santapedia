@@ -4,6 +4,10 @@
 
 {% block 'title' %}{% trans 'Calendário Litúrgico' %}{% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}Liturgical calendar of saints, saint of the day, and commemorative date.{% else %}Calendário litúrgico dos santos, santo do dia e data comemorativa.{% endif %}
+{% endblock %}
+
 {% block 'css' %}
     <link rel="stylesheet" href="{% static 'css/calendar.css' %}">
 {% endblock %}

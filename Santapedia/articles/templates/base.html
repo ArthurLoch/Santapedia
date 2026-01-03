@@ -28,6 +28,17 @@
     <link rel="manifest" href="{% static 'img/site.webmanifest' %}">
 
     <title>{% block 'title'%}{% endblock %}</title>
+
+    <title>{% block title %}Santapédia{% endblock %}</title>
+
+    <meta name="description" content="{% block meta_description %}
+    {% if request.LANGUAGE_CODE == 'en' %}Catholic encyclopedia about saints, prayers, and Christian tradition.{% else %}Enciclopédia católica sobre santos, orações e tradição cristã.{% endif %}{% endblock %}">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="{{ request.build_absolute_uri }}">
+
+    <link rel="alternate" hreflang="pt-br" href="{{ request.build_absolute_uri|cut:'/en/' }}">
+    <link rel="alternate" hreflang="en" href="{{ request.build_absolute_uri|cut:'/pt-br/' }}">
+
 </head>
 <body>
   
@@ -59,7 +70,7 @@
                 <input type="hidden" name="language" value="en">
                 <input type="hidden" name="next" value="{{ request.get_full_path }}">
                 <button type="submit" class="lang-btn">
-                    <img src="{% static 'img/us.png' %}" alt="American flag" class="flag-icon"> English
+                    <img src="{% static 'img/us.png' %}" alt="{% if request.LANGUAGE_CODE == 'en' %}American flag{% else %}Bandeira Amreicana{% endif %}" class="flag-icon"> English
                 </button>
             </form>
             {% else %}
@@ -68,7 +79,7 @@
                 <input type="hidden" name="language" value="pt-br">
                 <input type="hidden" name="next" value="{{ request.get_full_path }}">
                 <button type="submit" class="lang-btn">
-                  <img src="{% static 'img/br.png' %}" alt="Brazilian flag" class="flag-icon"> Português
+                  <img src="{% static 'img/br.png' %}" alt="{% if request.LANGUAGE_CODE == 'en' %}Brazilian flag{% else %}Bandeira Brasileira{% endif %}" class="flag-icon"> Português
                 </button>
             </form>
             {% endif %}
@@ -92,9 +103,9 @@
         <!-- Logo -->
         <a style="display: flex;" href="{% url 'home' %}" id="logo" aria-label="{% trans 'Logo da Santapédia' %}">
           {% if request.LANGUAGE_CODE == 'en' %}
-            <img src="{% static 'img/logo-1-en.png' %}" width="195.3125" height="50" class="d-inline-block align-top" alt="{% trans 'Santapédia' %}">
+            <img src="{% static 'img/logo-1-en.png' %}" width="195.3125" height="50" class="d-inline-block align-top" alt="{% if request.LANGUAGE_CODE == 'en' %}Santapedia logo{% else %}Logo da Santapédia{% endif %}">
           {% else %}
-            <img src="{% static 'img/logo-1.png' %}" width="195.3125" height="50" class="d-inline-block align-top" alt="{% trans 'Santapédia' %}">
+            <img src="{% static 'img/logo-1.png' %}" width="195.3125" height="50" class="d-inline-block align-top" alt="{% if request.LANGUAGE_CODE == 'en' %}Santapedia logo{% else %}Logo da Santapédia{% endif %}">
           {% endif %}
         </a>
 
@@ -116,7 +127,7 @@
               <input type="hidden" name="language" value="en">
               <input type="hidden" name="next" value="{{ request.get_full_path }}">
               <button type="submit" class="lang-btn">
-                  <img src="{% static 'img/us.png' %}" alt="American flag" class="flag-icon"> English
+                  <img src="{% static 'img/us.png' %}" alt="{% if request.LANGUAGE_CODE == 'en' %}American flag{% else %}Bandeira Amreicana{% endif %}" class="flag-icon"> English
               </button>
             </form>
           {% else %}
@@ -125,7 +136,7 @@
               <input type="hidden" name="language" value="pt-br">
               <input type="hidden" name="next" value="{{ request.get_full_path }}">
               <button type="submit" class="lang-btn">
-                <img src="{% static 'img/br.png' %}" alt="Brazilian flag" class="flag-icon"> Português
+                <img src="{% static 'img/br.png' %}" alt="{% if request.LANGUAGE_CODE == 'en' %}Brazilian flag{% else %}Bandeira Brasileira{% endif %}" class="flag-icon"> Português
               </button>
             </form>
           {% endif %}

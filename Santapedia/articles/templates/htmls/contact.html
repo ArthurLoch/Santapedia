@@ -4,6 +4,10 @@
 
 {% block 'title' %}{% trans 'Contato' %} - {% trans 'Santapédia' %}{% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}Contact form for Santapedia.{% else %}Formulário de contato da Santapédia.{% endif %}
+{% endblock %}
+
 {% block 'css' %}
     <link rel="stylesheet" href="{% static 'css/contact.css' %}">
 {% endblock %}

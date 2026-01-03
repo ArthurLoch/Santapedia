@@ -4,6 +4,14 @@
 
 {% block 'title' %}{% trans 'Santos - Santapédia' %}{% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
+        Learn about the saints of the Catholic Church: biographies, commemorative dates, and devotions.
+    {% else %}
+        Conheça os santos da Igreja Católica: biografias, datas comemorativas e devoções.
+    {% endif %}
+{% endblock %}
+
 {% block 'css'%}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
@@ -70,18 +78,18 @@
                         <div class="media">
                                 <div class="media-body">
                                     {% if request.LANGUAGE_CODE == 'en' %}
-                                        <h5 class="mt-0 mb-1">{{ article.title_en }}</h5>
+                                        <h3 class="mt-0 mb-1">{{ article.title_en }}</h3>
                                         <p>{{ article.description_en }}</p>
                                         <p>{{ article.content_en|truncatechars_html:500|safe }}</p>
                                     {% else %}
-                                        <h5 class="mt-0 mb-1">{{ article.title_pt }}</h5>
+                                        <h3 class="mt-0 mb-1">{{ article.title_pt }}</h3>
                                         <p>{{ article.description_pt }}</p>
                                         <p>{{ article.content_pt|truncatechars_html:500|safe }}</p>
                                     {% endif %}
                                     
                                 </div>
                                     {% if request.LANGUAGE_CODE == 'en' %}
-                                        <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_en }}" loading="lazy">
+                                        <img src="{{ article.image.url }}" class="ml-3" alt="Image of {{ article.title_en }}" loading="lazy">
                                     {% else %}
                                         <img src="{{ article.image.url }}" class="ml-3" alt="Imagem de {{ article.title_pt }}" loading="lazy">
                                     {% endif %}

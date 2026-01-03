@@ -4,6 +4,14 @@
 
 {% block 'title' %}{% trans 'Sobre a Santapédia' %}{% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
+        About Santapedia. Learn more about the Catholic encyclopedia project: its inspirations, goals, and values.
+    {% else %}
+        Sobre a Santapédia. Conheça mais sobre o projeto da enciclopédia católica: inspirações, objetivos e valores.
+    {% endif %}
+{% endblock %}
+
 {% block 'css'%}
     <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 {% endblock %}

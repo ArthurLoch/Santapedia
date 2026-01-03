@@ -4,6 +4,10 @@
 
 {% block 'title' %}{% trans 'Padroeiro da Cidade' %}{% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}Find the patron saint of your city, state or country in Santapedia.{% else %}Encontre o santo padroeiro da sua cidade, estado ou país na Santapédia.{% endif %}
+{% endblock %}
+
 {% block 'css'%}
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock %}
@@ -77,7 +81,7 @@
                                 <p>{{ saint.content_pt|truncatechars_html:500|safe }}</p>
                             {% endif %}
                         </div>
-                        <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title }}">
+                        <img src="{{ saint.image.url }}" class="ml-3" alt="{% if request.LANGUAGE_CODE == 'en' %}Image of {{saint.title_en}}{% else %}Imagem de {{saint.title_pt}}{% endif %}">
                 </div>
             </a>
         {% endfor %}

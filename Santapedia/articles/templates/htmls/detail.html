@@ -11,6 +11,14 @@
   - {% trans 'Santapédia' %} 
 {% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
+        The story of {{article.title_en}}, patron saint of {{article.patronages_en}}. Discover their life, deeds, and legacy on Santapédia.
+    {% else %}
+        A história de {{article.title_pt}}, santo(a) padroeiro(a) de {{article.patronages_pt}}. Descubra sua vida, feitos e legado na Santapédia.
+    {% endif %}
+{% endblock %}
+
 {% block 'css' %}
     <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 {% endblock %}
@@ -51,7 +59,7 @@
                 </th></tr>
                 <tr>
                     {% if article.image %}
-                        <th colspan="2" id="img"><img src="{{ article.image.url }}" alt="Imagem de {{ article.title }}" loading="lazy"></th>
+                        <th colspan="2" id="img"><img src="{{ article.image.url }}" alt="{% if request.LANGUAGE_CODE == 'en' %}Image of {{ article.title_en }}{% else %}Imagem de {{ article.title_pt }}{% endif %}" loading="lazy"></th>
                     {% else %}
                         <th>
                             <p>{% trans 'Sem imagem disponível' %}.</p>

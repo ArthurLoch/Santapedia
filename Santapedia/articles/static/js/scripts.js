@@ -83,7 +83,7 @@ document.addEventListener('DOMContentLoaded', function(){
                         if (item.image) {
                             const img = document.createElement('img');
                             img.src = item.image;
-                            img.alt = item.title;
+                            img.alt = `{% if request.LANGUAGE_CODE == 'en' %}Image of ${item.title}{% else %}Imagem de ${item.title}{% endif %}`;
                             img.style.width = '40px';
                             img.style.height = '40px';
                             img.style.objectFit = 'cover';

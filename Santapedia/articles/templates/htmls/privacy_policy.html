@@ -10,6 +10,14 @@
     {% endif %}
 {% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}
+        Política de Privacidade da Santapédia. Saiba como coletamos, usamos e protegemos seus dados pessoais em conformidade com a LGPD e o GDPR.
+    {% else %}
+        Santapedia's Privacy Policy. Learn how we collect, use, and protect your personal data in compliance with LGPD and GDPR.
+    {% endif %}
+{% endblock %}
+
 {% block 'css' %}
     <link rel="stylesheet" href="{% static 'css/detail.css' %}">
 {% endblock %}

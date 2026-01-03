@@ -21,8 +21,16 @@ from django.conf import settings
 from django.conf.urls.static import static
 from articles import views
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib.sitemaps.views import sitemap
+from .sitemaps import ArticleSitemap, PrayerSitemap
+
+sitemaps = {
+    'articles': ArticleSitemap,
+    'prayers': PrayerSitemap,
+}
 
 urlpatterns = [
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('i18n/', include('django.conf.urls.i18n')), 
     path('', views.redirect_to_home),
 ]

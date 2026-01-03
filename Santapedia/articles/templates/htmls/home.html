@@ -4,6 +4,10 @@
 
 {% block 'title' %}{% trans 'Santapédia' %}{% endblock %}
 
+{% block 'meta_description' %}
+    {% if request.LANGUAGE_CODE == 'en' %}Catholic encyclopedia with saints, prayers, liturgical calendar and historical content of the Church.{% else %}Enciclopédia católica com santos, orações, calendário litúrgico e conteúdos históricos da Igreja.{% endif %}
+{% endblock %}
+
 {% block 'css'%}
     <link rel="stylesheet" href="{% static 'css/prayers.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
@@ -32,11 +36,7 @@
                         </div>
 
                         {% if saint.image %}
-                            {% if request.LANGUAGE_CODE == 'en' %}
-                                <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_en }}" loading="lazy">
-                            {% else %}
-                                <img src="{{ saint.image.url }}" class="ml-3" alt="Imagem de {{ saint.title_pt }}" loading="lazy">
-                            {% endif %}
+                            <img src="{{ saint.image.url }}" class="ml-3" alt="{% if request.LANGUAGE_CODE == 'en' %}Image of {{saint.title_en}}{% else %}Imagem de {{saint.title_pt}}{% endif %}" loading="lazy">  
                         {% endif %}
                         
                 </div>
@@ -66,7 +66,7 @@
                 </div>
 
                 {% if prayer.saint and prayer.saint.image %}
-                    <img src="{{ prayer.saint.image.url }}" alt="Imagem de {{ prayer.saint.title_en }}" loading="lazy">
+                    <img src="{{ prayer.saint.image.url }}" alt="Image of {{prayer.saint.title_en}}" loading="lazy">
                 {% endif %}
             </article>
 
