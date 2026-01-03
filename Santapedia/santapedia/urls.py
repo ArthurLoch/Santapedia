@@ -26,7 +26,6 @@ from articles.sitemaps import ArticleSitemap, PrayerSitemap
 
 sitemaps = {
     'articles': ArticleSitemap,
-    'prayers': PrayerSitemap,
 }
 
 urlpatterns = [

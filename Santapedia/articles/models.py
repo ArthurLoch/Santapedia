@@ -4,6 +4,7 @@ from django.utils.text import slugify
 from django.contrib.postgres.indexes import GinIndex
 from django.contrib.postgres.search import SearchVectorField, SearchVector
 from cloudinary.models import CloudinaryField
+from django.urls import reverse
 
 # Create your models here.
 class Article(models.Model):
@@ -86,8 +87,10 @@ class Article(models.Model):
                 SearchVector("quotes_en", weight="C")
             )
         )
-    
 
+    def get_absolute_url(self):
+        return reverse("article_detail", args=[self.slug])
+    
     def __str__(self):
         return self.title
     
