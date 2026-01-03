@@ -22,7 +22,7 @@ from django.conf.urls.static import static
 from articles import views
 from django.conf.urls.i18n import i18n_patterns
 from django.contrib.sitemaps.views import sitemap
-from ..articles.sitemaps import ArticleSitemap, PrayerSitemap
+from articles.sitemaps import ArticleSitemap, PrayerSitemap
 
 sitemaps = {
     'articles': ArticleSitemap,
