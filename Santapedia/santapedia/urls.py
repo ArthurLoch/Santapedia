@@ -29,7 +29,6 @@ sitemaps = {
 }
 
 urlpatterns = [
-    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('i18n/', include('django.conf.urls.i18n')), 
     path('', views.redirect_to_home),
 ]
@@ -40,6 +39,7 @@ if settings.DEBUG:
     ]
 
 urlpatterns += i18n_patterns(
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
     path('admin/', admin.site.urls),
     path('home/', views.home, name='home'),
     path('articles/', include("articles.urls")),
