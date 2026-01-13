@@ -25,7 +25,7 @@ class Article(models.Model):
     content_pt = TextField()
     description_pt = TextField(db_index=True)
     category_pt = CharField(max_length=100, db_index=True)
-    country_pt = CharField(max_length=100, db_index=True)
+    country_pt = CharField(blank=True, null=True, max_length=100, db_index=True)
 
     born_date_text_pt = CharField(max_length=100, blank=True, null=True, db_index=True)
     death_date_text_pt = CharField(max_length=100, blank=True, null=True, db_index=True)
@@ -44,7 +44,7 @@ class Article(models.Model):
     content_en = TextField()
     description_en = TextField(db_index=True)
     category_en = CharField(max_length=100, db_index=True)
-    country_en = CharField(max_length=100, db_index=True)
+    country_en = CharField(blank=True, null=True, max_length=100, db_index=True)
 
     born_date_text_en = CharField(max_length=100, blank=True, null=True, db_index=True)
     death_date_text_en = CharField(max_length=100, blank=True, null=True, db_index=True)
