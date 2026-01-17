@@ -9,7 +9,7 @@ from django.core.mail import EmailMessage
 from django.db.models.functions import Lower
 from datetime import date
 from django.contrib.postgres.search import SearchQuery, SearchRank
-from django.db.models import F
+from django.db.models import F, Q
 from django.views.decorators.cache import cache_page
 from django.urls import reverse
 
@@ -72,19 +72,19 @@ def saints(request):
    
    # Display available Countries and Categories in the filter
     countries = (
-        Article.objects
-        .exclude(**{country_field: ""})
-        .values_list(country_field, flat=True)
-        .distinct()
-        .order_by(country_field)
+    Article.objects
+    .exclude(Q(**{f"{country_field}__isnull": True}) | Q(**{country_field: ""}))
+    .values_list(country_field, flat=True)
+    .distinct()
+    .order_by(country_field)
     )
 
     categories = (
-        Article.objects
-        .exclude(**{category_field: ""})
-        .values_list(category_field, flat=True)
-        .distinct()
-        .order_by(category_field)
+    Article.objects
+    .exclude(Q(**{f"{category_field}__isnull": True}) | Q(**{category_field: ""}))
+    .values_list(category_field, flat=True)
+    .distinct()
+    .order_by(category_field)
     )
 
     return render(
