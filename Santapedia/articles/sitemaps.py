@@ -1,15 +1,26 @@
 from django.contrib.sitemaps import Sitemap
-from .models import Article
+from django.utils import translation
+from articles.models import Article
 
-class ArticleSitemap(Sitemap):
-    changefreq = "weekly"
-    priority = 0.9
+
+class ArticleSitemapPT(Sitemap):
+    protocol = "https"
 
     def items(self):
         return Article.objects.all()
 
     def location(self, obj):
-        return obj.get_absolute_url()
+        with translation.override("pt-br"):
+            return obj.get_absolute_url()
 
-    def lastmod(self, obj):
-        return obj.created_at
+
+class ArticleSitemapEN(Sitemap):
+    protocol = "https"
+
+    def items(self):
+        return Article.objects.all()
+
+    def location(self, obj):
+        with translation.override("en"):
+            return obj.get_absolute_url()
+        
