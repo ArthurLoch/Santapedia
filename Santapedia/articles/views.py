@@ -390,7 +390,7 @@ def saints_by_month(request):
     saints = (
         Article.objects
         .filter(feast_day__isnull=False, feast_day__month=month)
-        .only("feast_day", title_field, "slug", "image")
+        .only("feast_day", title_field, "slug", "image").order_by("feast_day")
     )
 
     data = []
