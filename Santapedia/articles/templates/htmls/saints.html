@@ -98,6 +98,35 @@
                     </a>
                 {% endfor %}
 
+                <div class="pagination">
+
+                {% if page_obj.has_previous %}
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page=1">
+                        « {% trans "Primeira" %}
+                    </a>
+
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.previous_page_number }}">
+                        ‹ {% trans "Anterior" %}
+                    </a>
+                {% endif %}
+
+                <span>
+                    {% trans "Página" %} {{ page_obj.number }} {% trans "de" %} {{ page_obj.paginator.num_pages }}
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.next_page_number }}">
+                        {% trans "Próxima" %} ›
+                    </a>
+
+                    <a href="?{% for key, value in request.GET.items %}{% if key != 'page' %}{{ key }}={{ value }}&{% endif %}{% endfor %}page={{ page_obj.paginator.num_pages }}">
+                        {% trans "Última" %} »
+                    </a>
+                {% endif %}
+
+            </div>
+            {% endif %}
+
         </div>
 
     {% else %}

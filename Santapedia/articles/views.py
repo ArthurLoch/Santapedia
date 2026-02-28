@@ -12,6 +12,7 @@ from django.contrib.postgres.search import SearchQuery, SearchRank
 from django.db.models import F, Q
 from django.views.decorators.cache import cache_page
 from django.urls import reverse
+from django.core.paginator import Paginator
 
 @cache_page(60 * 10)
 def home(request):
@@ -87,12 +88,17 @@ def saints(request):
     .order_by(category_field)
     )
 
+    paginator = Paginator(articles, 12)  # 12 santos por página
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
+
     return render(
         request,
         "htmls/saints.html",
         {
-            "articles": articles,
-            "len_articles": articles.count(),
+            "page_obj": page_obj,
+            "articles": page_obj,   # mantém compatibilidade com o template
+            "len_articles": paginator.count,
             "countries": countries,
             "categories": categories,
             "saints": True,
