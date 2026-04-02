@@ -23,7 +23,7 @@ Our goal is also to facilitate access to reliable information on Catholic tradit
 
 ### Contact Us
 * Email: santapedia.contato@gmail.com
-* Instagram: @santapedia_en
+* Instagram: [@santapedia_en](https://www.instagram.com/santapedia_en/)
 
 ## Technologies
     Django
