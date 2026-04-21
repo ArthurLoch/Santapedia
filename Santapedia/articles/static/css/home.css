@@ -142,7 +142,7 @@ button.clear-btn > a{
   text-decoration: none;  
 }
 .pagination {
-    margin: 40px 0;
+    margin: 40px auto;
     text-align: center;
     font-size: 0.95rem;
 }
@@ -151,16 +151,11 @@ button.clear-btn > a{
     margin: 0 8px;
     text-decoration: none;
     font-weight: 500;
+    color: var(--color-10);
 }
 
 .pagination span {
     margin: 0 10px;
-    color: #555;
-}
-div.pagination a{
-    color: var(--color-10);
-}
-div.pagination span{
     color: var(--color-9);
 }
 @media (max-width: 725px) {
