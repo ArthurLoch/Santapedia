@@ -68,7 +68,7 @@ def saints(request):
     elif order == "oldest":
         articles = articles.order_by("created_at")
     else:
-        articles = articles.order_by(Lower(title_field))
+        articles = articles.order_by(title_field)
 
    
    # Display available Countries and Categories in the filter
@@ -88,15 +88,17 @@ def saints(request):
     .order_by(category_field)
     )
 
-    # paginator = Paginator(articles, 12)  # 12 santos por página
-    # page_number = request.GET.get("page")
-    # page_obj = paginator.get_page(page_number)
+    paginator = Paginator(articles, 12)  # 12 santos por página
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
 
     return render(
         request,
         "htmls/saints.html",
         {
-            "articles": articles,
+            "page_obj": page_obj,
+            "articles": page_obj,   # mantém compatibilidade com o template
+            "len_articles": paginator.count,
             "countries": countries,
             "categories": categories,
             "saints": True,
