@@ -484,3 +484,18 @@ msgstr "Search results"
 #: .\articles\templates\htmls\search.html:85
 msgid "Não há artigos com esse nome"
 msgstr "No articles with this name"
+
+msgid "Primeira"
+msgstr "First"
+
+msgid "Anterior"
+msgstr "Previous"
+
+msgid "Próxima"
+msgstr "Next"
+
+msgid "Última"
+msgstr "Last"
+
+msgid "de"
+msgstr "of"

@@ -9,7 +9,8 @@
     --color-6: #f7f7f7;
     --color-7: #ffffff;
     --color-8: #000000;
-    --color-9: #b4b4b4;
+    --color-9: #555555;
+    --color-10: #1e3a8a;
 }
 body.dark-mode {
     --color-1: #0D1F44; 
@@ -20,7 +21,8 @@ body.dark-mode {
     --color-6: #2a2a2a;
     --color-7: #000000;
     --color-8: #ffffff;
-    --color-9: #676767;
+    --color-9: #a1a1a1;
+    --color-10: #0d6efd;
 }
 main.container{
     margin-top: 20px;
@@ -154,6 +156,12 @@ button.clear-btn > a{
 .pagination span {
     margin: 0 10px;
     color: #555;
+}
+div.pagination a{
+    color: var(--color-10);
+}
+div.pagination span{
+    color: var(--color-9);
 }
 @media (max-width: 725px) {
     div#menu-filter button, div#menu-cities button{
