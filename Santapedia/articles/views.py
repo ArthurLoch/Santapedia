@@ -63,12 +63,13 @@ def saints(request):
 
 
     # Sort according to the selected option
-    if order == "latest":
-        articles = articles.order_by("-created_at")
-    elif order == "oldest":
-        articles = articles.order_by("created_at")
-    else:
-        articles = articles.order_by(title_field)
+    if not title:
+        if order == "latest":
+            articles = articles.order_by("-created_at")
+        elif order == "oldest":
+            articles = articles.order_by("created_at")
+        else:
+            articles = articles.order_by(title_field)
 
    
    # Display available Countries and Categories in the filter
@@ -97,7 +98,7 @@ def saints(request):
         "htmls/saints.html",
         {
             "page_obj": page_obj,
-            "articles": articles,   # mantém compatibilidade com o template
+            "articles": page_obj,   # mantém compatibilidade com o template
             "len_articles": paginator.count,
             "countries": countries,
             "categories": categories,
