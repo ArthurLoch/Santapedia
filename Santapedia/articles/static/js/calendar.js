@@ -4,7 +4,12 @@ document.addEventListener('DOMContentLoaded', function() {
   
     function renderSaintsList(month, year) {
       // Get the date
-      fetch(`/ajax/saints-by-month/?month=${month}&year=${year}`)
+      if (window.currentLanguage === 'en') {
+        var language = 'en'
+      } else {
+        var language = 'pt-br'
+      }
+      fetch(`${language}/ajax/saints-by-month/?month=${month}&year=${year}`)
         .then(response => {
           if (!response.ok) throw new Error("Erro na resposta: " + response.status);
           return response.json();
@@ -40,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${imageHtml}
               <div>
                 <p class="fw-semibold text-decoration-none">
-                  ${saint.title_en}
+                  ${saint.title}
                 </p>
                 <div class="text-muted small">${new Date(2000, saint.month - 1).toLocaleString('en', { month: 'long' })} ${saint.day}</div>
               </div>
@@ -52,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${imageHtml}
               <div>
                 <p class="fw-semibold text-decoration-none">
-                  ${saint.title_pt}
+                  ${saint.title}
                 </p>
                 <div class="text-muted small">${saint.day} de ${new Date(2000, saint.month - 1).toLocaleString('pt-BR', { month: 'long' })}</div>
               </div>
@@ -79,12 +84,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // create the calendar
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
-      locale: currentLanguage == 'en' ? 'en' : 'pt-br',
+      locale: ,
       timeZone: 'local',
       height: 'auto',
       headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
       buttonText: currentLanguage == 'en' ? { today: 'Today' } : { today: 'Hoje' },
-      events: "/ajax/calendar-data/",
+      events: `${currentLanguage == 'en' ? 'en' : 'pt-br'}/ajax/calendar-data/`,
       eventClick: function(info) { /* ... */ },
       eventDidMount: function(info) { /* style */ },
       datesSet: function(info) {
