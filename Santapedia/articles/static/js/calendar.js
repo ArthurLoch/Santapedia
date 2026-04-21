@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${imageHtml}
               <div>
                 <p class="fw-semibold text-decoration-none">
-                  ${saint.title}
+                  ${saint.title_en}
                 </p>
                 <div class="text-muted small">${new Date(2000, saint.month - 1).toLocaleString('en', { month: 'long' })} ${saint.day}</div>
               </div>
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
               ${imageHtml}
               <div>
                 <p class="fw-semibold text-decoration-none">
-                  ${saint.title}
+                  ${saint.title_pt}
                 </p>
                 <div class="text-muted small">${saint.day} de ${new Date(2000, saint.month - 1).toLocaleString('pt-BR', { month: 'long' })}</div>
               </div>
