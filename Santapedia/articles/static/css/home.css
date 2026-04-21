@@ -142,6 +142,7 @@ button.clear-btn > a{
   text-decoration: none;  
 }
 .pagination {
+    width: 80vw;
     margin: 40px auto;
     text-align: center;
     font-size: 0.95rem;
@@ -157,6 +158,9 @@ button.clear-btn > a{
 .pagination span {
     margin: 0 10px;
     color: var(--color-9);
+}
+.pagination .pag-child{
+    margin: auto;
 }
 @media (max-width: 725px) {
     div#menu-filter button, div#menu-cities button{
