@@ -97,7 +97,7 @@ def saints(request):
         "htmls/saints.html",
         {
             "page_obj": page_obj,
-            "articles": page_obj,   # mantém compatibilidade com o template
+            "articles": articles,   # mantém compatibilidade com o template
             "len_articles": paginator.count,
             "countries": countries,
             "categories": categories,
