@@ -84,12 +84,12 @@ document.addEventListener('DOMContentLoaded', function() {
     // create the calendar
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
-      locale: ,
+      locale: currentLanguage == 'en' ? 'en' : 'pt-br',
       timeZone: 'local',
       height: 'auto',
       headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
       buttonText: currentLanguage == 'en' ? { today: 'Today' } : { today: 'Hoje' },
-      events: `${currentLanguage == 'en' ? 'en' : 'pt-br'}/ajax/calendar-data/`,
+      events: `${}/ajax/calendar-data/`,
       eventClick: function(info) { /* ... */ },
       eventDidMount: function(info) { /* style */ },
       datesSet: function(info) {
