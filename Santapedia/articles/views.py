@@ -88,17 +88,15 @@ def saints(request):
     .order_by(category_field)
     )
 
-    paginator = Paginator(articles, 12)  # 12 santos por página
-    page_number = request.GET.get("page")
-    page_obj = paginator.get_page(page_number)
+    # paginator = Paginator(articles, 12)  # 12 santos por página
+    # page_number = request.GET.get("page")
+    # page_obj = paginator.get_page(page_number)
 
     return render(
         request,
         "htmls/saints.html",
         {
-            "page_obj": page_obj,
-            "articles": page_obj,   # mantém compatibilidade com o template
-            "len_articles": paginator.count,
+            "articles": articles,
             "countries": countries,
             "categories": categories,
             "saints": True,
