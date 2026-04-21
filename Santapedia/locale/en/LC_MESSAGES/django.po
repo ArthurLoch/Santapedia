@@ -497,5 +497,8 @@ msgstr "Next"
 msgid "Última"
 msgstr "Last"
 
+msgid "Página"
+msgstr "Page"
+
 msgid "de"
 msgstr "of"
