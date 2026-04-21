@@ -195,4 +195,10 @@ button.clear-btn > a{
     button#filter{
         margin: auto auto 15px auto;
     }
+    .pagination {
+        font-size: 0.75rem;
+    }
+    .pagination a {
+    margin: 0 3px;
+}
 }
