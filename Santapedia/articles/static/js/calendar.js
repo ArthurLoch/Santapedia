@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
       height: 'auto',
       headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
       buttonText: currentLanguage == 'en' ? { today: 'Today' } : { today: 'Hoje' },
-      events: `${}/ajax/calendar-data/`,
+      events: `${currentLanguage == 'en' ? 'en' : 'pt-br'}/ajax/calendar-data/`,
       eventClick: function(info) { /* ... */ },
       eventDidMount: function(info) { /* style */ },
       datesSet: function(info) {
