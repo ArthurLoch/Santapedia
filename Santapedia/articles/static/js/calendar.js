@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
       } else {
         var language = 'pt-br'
       }
-      fetch(`/${language}/ajax/saints-by-month/?month=${month}&year=${year}`)
+      fetch(`https://www.santapedia.org/${language}/ajax/saints-by-month/?month=${month}&year=${year}`)
         .then(response => {
           if (!response.ok) throw new Error("Erro na resposta: " + response.status);
           return response.json();
