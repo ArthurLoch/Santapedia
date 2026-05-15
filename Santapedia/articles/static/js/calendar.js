@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
       height: 'auto',
       headerToolbar: { left: 'prev,next today', center: 'title', right: '' },
       buttonText: currentLanguage == 'en' ? { today: 'Today' } : { today: 'Hoje' },
-      events: `${currentLanguage == 'en' ? 'en' : 'pt-br'}/ajax/calendar-data/`,
+      events: `https://www.santapedia.org/${currentLanguage == 'en' ? 'en' : 'pt-br'}/ajax/calendar-data/`,
       eventClick: function(info) { /* ... */ },
       eventDidMount: function(info) { /* style */ },
       datesSet: function(info) {
