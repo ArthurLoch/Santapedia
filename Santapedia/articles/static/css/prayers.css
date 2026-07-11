@@ -39,7 +39,6 @@ h1 {
 .media {
     display: flex;
     justify-content: space-between;
-    align-items: stretch; /* Faz a imagem colar nas bordas verticais */
     background-color: var(--color-6);
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.35);
     border-radius: 15px;
