@@ -74,7 +74,7 @@
             
                 {% for article in articles %}
                     <!-- Saint card -->
-                    <a href="/articles/{{article.slug}}/" class="article">
+                    <a href="{{lang}}/articles/{{article.slug}}/" class="article">
                         <div class="media">
                                 <div class="media-body">
                                     {% if request.LANGUAGE_CODE == 'en' %}

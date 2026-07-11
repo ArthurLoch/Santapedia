@@ -21,7 +21,7 @@
         <!-- Saints -->
         <h2>{% trans 'Santos' %} ({{ len_saints }})</h2>
         {% for saint in saints %}
-            <a href="/articles/{{saint.slug}}/" class="article">
+            <a href="/{{lang}}/articles/{{saint.slug}}/" class="article">
                 <div class="media">
                         <div class="media-body">
                         {% if request.LANGUAGE_CODE == 'en' %}

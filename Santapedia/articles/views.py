@@ -16,12 +16,14 @@ from django.core.paginator import Paginator
 
 @cache_page(60 * 10)
 def home(request):
+    lang = request.LANGUAGE_CODE
+
     # Filter 5 articles and 5 prayers to be featured on the homepage
     articles = (Article.objects.only('id','title_pt', 'title_en', 'description_pt', 'description_en', 'content_pt', 'content_en', 'slug', 'image').order_by('title_pt')[:5])
 
     prayers = (Prayer.objects.select_related('saint').only('id','title_pt', 'title_en', 'content_pt', 'content_en', 'saint__id', 'saint__title_pt', 'saint__title_en', 'saint__image').order_by('title_pt')[:5])
 
-    return render(request, 'htmls/home.html', {'saints': articles, 'len_saints': Article.objects.count(), 'len_prayers': Prayer.objects.count(), 'prayers': prayers})
+    return render(request, 'htmls/home.html', {'saints': articles, 'len_saints': Article.objects.count(), 'len_prayers': Prayer.objects.count(), 'prayers': prayers, 'lang': lang})
 
 def redirect_to_home(request):
     # if the URL is empty, redirect to home
@@ -103,6 +105,7 @@ def saints(request):
             "countries": countries,
             "categories": categories,
             "saints": True,
+            "lang": lang,
         },
     )
 

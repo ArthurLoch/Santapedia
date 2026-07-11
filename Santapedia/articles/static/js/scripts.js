@@ -7,6 +7,11 @@ document.addEventListener('DOMContentLoaded', function(){
     const logo = document.getElementById('logo');
     const menu = document.getElementById('menu');
     const list = document.getElementById('suggestions');
+    if (window.currentLanguage === 'en') {
+        var language = 'en'
+    } else {
+        var language = 'pt-br'
+    }
 
     magnifying_glass.addEventListener('click', function() {
         toggleSearch();
@@ -73,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
                     data.results.forEach(item => {
                         const link = document.createElement('a');
-                        link.href = `/articles/${item.slug}/`;
+                        link.href = `/${language}/articles/${item.slug}/`;
 
                         const container = document.createElement('div');
                         container.style.display = 'flex';
