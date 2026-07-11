@@ -252,6 +252,7 @@ def aleatory(request):
 
 @cache_page(60 * 10)
 def patronized_cities(request):
+    lang = request.LANGUAGE_CODE
     # Get filter parameters
     country_id = request.GET.get("country")
     state_abbreviation = request.GET.get("state")
@@ -334,6 +335,7 @@ def patronized_cities(request):
             "states": states,
             "cities": cities,
             "saints": saints,
+            "lang": lang,
         },
     )
 
@@ -385,7 +387,7 @@ def calendar_data(request):
             "title": s[title_field],
             "start": feast_day.strftime("%Y-%m-%d"),
             "allDay": True,
-            "url": f"/articles/{s['slug']}/",
+            "url": f"/{lang}/articles/{s['slug']}/",
         })
 
     return JsonResponse(events, safe=False)

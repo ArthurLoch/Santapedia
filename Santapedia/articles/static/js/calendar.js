@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // create a <a> for each saint in that month
           data.saints.forEach(saint => {
             const saintItem = document.createElement("a");
-            saintItem.href = `/articles/${saint.slug}/`
+            saintItem.href = `/${language}/articles/${saint.slug}/`
             saintItem.classList.add("d-flex", "align-items-center", "mb-3");
   
             const imageHtml = saint.image
