@@ -502,3 +502,12 @@ msgstr "Page"
 
 msgid "de"
 msgstr "of"
+
+msgid "Página Não Encontrada"
+msgstr "Page Not Found"
+
+msgid "Ops! Não conseguimos encontrar a página."
+msgstr "Sorry! We couldn't find the page."
+
+msgid "Início"
+msgstr "Go Home"

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+
+:root {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #f7f7f7;
+    --color-7: #ffffff;
+    --color-8: #000000;
+    --color-9: #555555;
+}
+body.dark-mode {
+    --color-1: #0D1F44; 
+    --color-2: #17346D;
+    --color-3: #c6aa2c;
+    --color-4: #dbc76b;
+    --color-5: #ffc107;
+    --color-6: #2a2a2a;
+    --color-7: #000000;
+    --color-8: #ffffff;
+    --color-9: #a1a1a1;
+}
+body{
+    text-align: center;
+    width: 98vw;
+    height: 97vh;
+}
+h1{
+    font-size: 10em;
+    color: var(--color-2);
+    margin: auto;
+    font-family: "Rubik Spray Paint", system-ui;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0 auto;
+}
+h2{
+    color: var(--color-2);
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 800;
+    font-style: normal;
+    font-size: 2.5em;
+    margin: 0;
+}
+p{
+    color: var(--color-2);
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 1.2em;
+    margin-top: 0;
+}
+img{
+    width: 300px;
+}
+button{
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    background-color: var(--color-1);
+    color: var(--color-3);
+    font-family: "Nunito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: normal;
+}
+a{
+    width: 100px;
+    height: 50px;
+    border-radius: 30px;
+    text-decoration: none;
+    display: block;
+    margin: 15px auto;
+}
+button:hover{
+    background-color: var(--color-2);
+    cursor: pointer;
+}

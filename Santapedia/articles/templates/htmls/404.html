@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block 'title' %}{% trans 'Página Não Encontrada' %}{% endblock %}
+
+{% block 'css'%}
+    <link rel="stylesheet" href="{% static 'css/404.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Rubik+Spray+Paint&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block 'body' %}
+
+    <h1>404</h1>
+    <h2>{% trans 'Página Não Encontrada' %}</h2>
+    <p>{% trans 'Ops! Não conseguimos encontrar a página.' %}</p>
+    <img src="{% static 'img/frank.png' %}" alt="Frank">
+    <a href="{% url 'home' %}"><button>{% trans 'Início' %}</button></a>
+
+{% endblock %}
