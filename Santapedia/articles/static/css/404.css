@@ -22,12 +22,7 @@ body.dark-mode {
     --color-8: #ffffff;
     --color-9: #a1a1a1;
 }
-body{
-    text-align: center;
-    width: 98vw;
-    height: 97vh;
-}
-h1{
+h1.titulo404{
     font-size: 10em;
     color: var(--color-2);
     margin: auto;
@@ -36,7 +31,7 @@ h1{
     font-style: normal;
     margin: 0 auto;
 }
-h2{
+h2.subtitulo404{
     color: var(--color-2);
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
@@ -45,7 +40,7 @@ h2{
     font-size: 2.5em;
     margin: 0;
 }
-p{
+p.paragrafo404{
     color: var(--color-2);
     font-family: "Nunito", sans-serif;
     font-optical-sizing: auto;
@@ -54,10 +49,10 @@ p{
     font-size: 1.2em;
     margin-top: 0;
 }
-img{
+img.imagem404{
     width: 300px;
 }
-button{
+button.botao404{
     width: 100px;
     height: 50px;
     border-radius: 30px;
@@ -68,7 +63,7 @@ button{
     font-weight: 900;
     font-style: normal;
 }
-a{
+a.link404{
     width: 100px;
     height: 50px;
     border-radius: 30px;
@@ -76,7 +71,7 @@ a{
     display: block;
     margin: 15px auto;
 }
-button:hover{
+button.botao404:hover{
     background-color: var(--color-2);
     cursor: pointer;
 }
