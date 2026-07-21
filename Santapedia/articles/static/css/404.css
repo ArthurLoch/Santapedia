@@ -22,6 +22,9 @@ body.dark-mode {
     --color-8: #ffffff;
     --color-9: #a1a1a1;
 }
+main{
+    text-align: center;
+}
 h1.titulo404{
     font-size: 10em;
     color: var(--color-2);
